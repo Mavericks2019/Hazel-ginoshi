@@ -37,4 +37,4 @@ namespace Hazel {
 #define HZ_CLIENT_WARN(...)       ::Hazel::Log::GetClientLogger()->warn(__VA_ARGS__)
 #define HZ_CLIENT_INFO(...)       ::Hazel::Log::GetClientLogger()->info(__VA_ARGS__)
 #define HZ_CLIENT_WARN(...)      ::Hazel::Log::GetClientLogger()->trace(__VA_ARGS__)
-#define HZ_CLIENT_WARN(...)      ::Hazel::Log::GetClientLogger()->trace(__VA_ARGS__)
+#define HZ_CLIENT_FATAL(...)      ::Hazel::Log::GetClientLogger()->trace(__VA_ARGS__)
