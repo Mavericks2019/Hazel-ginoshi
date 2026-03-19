@@ -10,6 +10,11 @@
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
+-- include directories
+IncludeDir = {}
+IncludeDir["GLFW"] = "vendor/GLFW/include"
+include "vendor/GLFW"
+
 project "Hazel"
 	
 	kind "SharedLib"
@@ -30,7 +35,13 @@ project "Hazel"
 	includedirs
 	{
 		"vendor/spdlog-1.2.1/include",
-		"src"
+		"src",
+		"%{IncludeDir.GLFW}"
+	}
+	links
+	{
+		"GLFW",
+		"opengl32.lib"
 	}
 
 	filter "system:windows"

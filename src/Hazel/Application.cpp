@@ -2,12 +2,13 @@
 #include "Application.h"
 #include "Hazel/Events/ApplicationEvent.h"
 #include "Hazel/Log.h"
-#include <iostream>
+#include <GLFW/glfw3.h>
 
 namespace Hazel {
 
 	Application::Application()
 	{
+		m_Window = std::unique_ptr<Window>(Window::Create());
 	}
 
 	Application::~Application()
@@ -16,11 +17,12 @@ namespace Hazel {
 
 	void Application::Run()
 	{
-		WindowResizeEvent e(1280, 720);
-		std::cout << e << std::endl;
-		HZ_CLIENT_TRACE(e); // change spdlog version
-		HZ_CLIENT_TRACE(e); // change spdlog version
 
-		while(true);
+		while (m_Running)
+		{
+			glClearColor(0.5, 0.5, 0.5, 1);
+			glClear(GL_COLOR_BUFFER_BIT);
+			m_Window->OnUpdate();
+		}
 	}
 }
