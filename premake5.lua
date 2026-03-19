@@ -26,13 +26,14 @@ project "Hazel"
 
 	includedirs
 	{
-		"vendor/spdlog/include"
+		"vendor/spdlog-1.2.1/include",
+		"src"
 	}
 
 	filter "system:windows"
 		cppdialect "C++17"
 		staticruntime "On"
-		systemversion "10.0.26100.0"
+		systemversion "latest"
 
 		defines
 		{
@@ -83,7 +84,7 @@ project "Sandox"
 
 	includedirs
 	{
-		"vendor/spdlog/include",
+		"vendor/spdlog-1.2.1/include",
 		"src"
 	}
 
@@ -95,7 +96,7 @@ project "Sandox"
 	filter "system:windows"
 		cppdialect "C++17"
 		staticruntime "On"
-		systemversion "10.0.26100.0"
+		systemversion "latest"
 
 		defines
 		{
