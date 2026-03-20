@@ -4,8 +4,6 @@
 #include "Hazel/Log.h"
 #include "GLFW/glfw3.h"
 
-#include <GLFW/glfw3.h>
-
 namespace Hazel {
 
 	class WindowsWindow : public Window
@@ -20,7 +18,7 @@ namespace Hazel {
 		unsigned int GetHeight() const override { return m_Data.Height; }
 
 		// Window attributes
-		void SetEventCallback(const EventCallbackFn& callback) override { m_Data.EventCallback = callback; }
+		inline void SetEventCallback(const EventCallbackFn& callback) override { m_Data.EventCallback = callback; }
 		void SetVSync(bool enabled) override;
 		bool IsVSync() const override;
 
