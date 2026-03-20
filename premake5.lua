@@ -63,23 +63,23 @@ project "Hazel"
 	filter "configurations:Debug"
 		defines "HZ_DEBUG"
 		symbols "On"
-		buildoptions "/utf-8"
+		buildoptions { "/utf-8","/MDd" }
 
 
 	filter "configurations:Release"
 		defines "HZ_RELEASE"
 		symbols "On"
-		buildoptions "/utf-8"
+		buildoptions {"/utf-8","/MD"}
 
 
 	filter "configurations:Dist"
 		defines "HZ_DIST"
 		symbols "On"
-		buildoptions "/utf-8"
+		buildoptions {"/utf-8","/MD"}
 
 
-	filter {"system:windows", "configurations:Release"}
-		buildoptions "/utf-8"
+	filter {"system:windows","configurations:Release"}
+		buildoptions {"/utf-8","/MD"}
 
 
 project "Sandox"
@@ -121,17 +121,17 @@ project "Sandox"
 	filter "configurations:Debug"
 		defines "HZ_DEBUG"
 		symbols "On"
-		buildoptions "/utf-8"
+		buildoptions {"/utf-8","/MDd"}
 
 	filter "configurations:Release"
 		defines "HZ_RELEASE"
 		symbols "On"
-		buildoptions "/utf-8"
+		buildoptions {"/utf-8","/MD"}
 
 	filter "configurations:Dist"
 		defines "HZ_DIST"
 		symbols "On"
-		buildoptions "/utf-8"
+		buildoptions {"/utf-8","/MD"}
 
-	filter {"system:windows", "configurations:Release"}
-		buildoptions "/utf-8"
+	filter {"system:windows","configurations:Release"}
+		buildoptions {"/utf-8","/MD"}
