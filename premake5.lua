@@ -13,7 +13,10 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 -- include directories
 IncludeDir = {}
 IncludeDir["GLFW"] = "vendor/GLFW/include"
+IncludeDir["Glad"] = "vendor/Glad/include"
+
 include "vendor/GLFW"
+include "vendor/Glad"
 
 project "Hazel"
 	
@@ -36,11 +39,14 @@ project "Hazel"
 	{
 		"vendor/spdlog-1.2.1/include",
 		"src",
-		"%{IncludeDir.GLFW}"
+		"%{IncludeDir.GLFW}",
+		"%{IncludeDir.Glad}"
+
 	}
 	links
 	{
 		"GLFW",
+		"Glad",
 		"opengl32.lib"
 	}
 
@@ -52,7 +58,9 @@ project "Hazel"
 		defines
 		{
 			"HZ_PLATFORM_WINDOWS",
-			"HZ_BUILD_DLL"
+			"HZ_BUILD_DLL",
+			"GLFW_INCLUDE_NONE"
+
 		}
 		postbuildcommands
 		{
