@@ -16,7 +16,7 @@ public:
 
 	void OnEvent(Hazel::Event& event) override
 	{
-		HZ_CLIENT_INFO("ExampleLayer::Update");
+		HZ_CLIENT_INFO(event);
 	}
 
 };
@@ -27,6 +27,7 @@ public:
 	Sandox() 
 	{
 		PushLayer(new ExampleLayer());
+		PushOverlay(new Hazel::ImGuiLayer());
 	}
 	~Sandox() 
 	{
