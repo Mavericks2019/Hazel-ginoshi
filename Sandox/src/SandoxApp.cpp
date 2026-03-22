@@ -1,4 +1,5 @@
 
+#include "hzpch.h"
 #include "Hazel.h"
 
 class ExampleLayer : public Hazel::Layer
@@ -26,7 +27,7 @@ class Sandox : public Hazel::Application
 public:
 	Sandox() 
 	{
-		PushLayer(new ExampleLayer());
+		//PushLayer(new ExampleLayer());
 		PushOverlay(new Hazel::ImGuiLayer());
 	}
 	~Sandox() 
