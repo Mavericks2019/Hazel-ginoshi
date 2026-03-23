@@ -161,6 +161,8 @@
     <ClInclude Include="src\Hazel\LayerStack.h" />
     <ClInclude Include="src\Hazel\Log.h" />
     <ClInclude Include="src\Hazel\window.h" />
+    <ClInclude Include="src\KeyCodes.h" />
+    <ClInclude Include="src\MouseButtonCodes.h" />
     <ClInclude Include="src\Platform\OpenGL\InGuiOPemGLRender.h" />
     <ClInclude Include="src\Platform\Windows\WindowsInput.h" />
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h" />

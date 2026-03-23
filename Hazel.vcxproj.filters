@@ -67,6 +67,8 @@
     <ClInclude Include="src\hzpch.h" />
     <ClInclude Include="src\Hazel\input.h" />
     <ClInclude Include="src\Platform\Windows\WindowsInput.h" />
+    <ClInclude Include="src\KeyCodes.h" />
+    <ClInclude Include="src\MouseButtonCodes.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Hazel\Application.cpp">
