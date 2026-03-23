@@ -2,6 +2,7 @@
 #include "Application.h"
 #include "Hazel/Log.h"
 #include <glad/glad.h>
+#include "Platform/Windows/WindowsInput.h"
 
 namespace Hazel {
 
@@ -65,12 +66,14 @@ namespace Hazel {
 
 		while (m_Running)
 		{
-			glClearColor(0.5, 0.5, 0.5, 1);
+			glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 			glClear(GL_COLOR_BUFFER_BIT);
 
 			for (Layer* layer : m_LayerStack)
 			{
 				layer->OnUpdate();
+				auto [x, y] = Input::GetMousePosition();
+				HZ_CORE_TRACE("{0},{1}", x, y);
 			}
 
 			m_Window->OnUpdate();
