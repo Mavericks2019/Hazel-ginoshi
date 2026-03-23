@@ -55,7 +55,7 @@ public:
 	Sandox() 
 	{
 		PushLayer(new ExampleLayer());
-		PushOverlay(new Hazel::ImGuiLayer());
+		//PushOverlay(new Hazel::ImGuiLayer());
 	}
 	~Sandox() 
 	{

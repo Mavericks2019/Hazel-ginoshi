@@ -5,6 +5,8 @@
 #include "window.h"
 #include "LayerStack.h"
 
+#include "Hazel/ImGui/ImGuiLayer.h"
+
 namespace Hazel {
 
 	class HAZEL_API Application
@@ -22,6 +24,8 @@ namespace Hazel {
 		inline Window& GetWindow() { return *m_Window; }
 	private:
 		std::unique_ptr<Window> m_Window;
+		ImGuiLayer* m_ImGuiLayer;
+
 		bool m_Running = true;
 		bool OnWindowClose(WindowCloseEvent& e);
 		LayerStack m_LayerStack;
