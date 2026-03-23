@@ -3,6 +3,7 @@
 #include "Hazel/Log.h"
 #include <glad/glad.h>
 #include "Platform/Windows/WindowsInput.h"
+#include "glm/glm.hpp"
 
 namespace Hazel {
 

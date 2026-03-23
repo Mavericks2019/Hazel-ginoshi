@@ -15,6 +15,7 @@ IncludeDir = {}
 IncludeDir["GLFW"] = "vendor/GLFW/include"
 IncludeDir["Glad"] = "vendor/Glad/include"
 IncludeDir["ImGui"] = "vendor/imgui"
+IncludeDir["glm"] = "vendor/glm"
 
 include "vendor/GLFW"
 include "vendor/Glad"
@@ -35,6 +36,9 @@ project "Hazel"
 	{
 		"src/**.h",
 		"src/**.cpp",
+		"vendor/glm/glm/**.hpp",
+		"vendor/glm/glm/**.inl",
+
 	}
 
 	includedirs
@@ -43,7 +47,8 @@ project "Hazel"
 		"src",
 		"%{IncludeDir.GLFW}",
 		"%{IncludeDir.Glad}",
-		"%{IncludeDir.ImGui}"
+		"%{IncludeDir.ImGui}",
+		"%{IncludeDir.glm}"
 	}
 	links
 	{
@@ -110,7 +115,8 @@ project "Sandox"
 	includedirs
 	{
 		"vendor/spdlog-1.2.1/include",
-		"src"
+		"src",
+		"%{IncludeDir.glm}"
 	}
 
 	links
