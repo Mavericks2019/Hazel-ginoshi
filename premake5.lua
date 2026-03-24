@@ -23,8 +23,9 @@ include "vendor/imgui"
 
 project "Hazel"
 	
-	kind "SharedLib"
+	kind "StaticLib"
 	language "C++"
+	staticruntime "on"
 
 	targetdir("bin/" .. outputdir .. "/%{prj.name}")
 	objdir("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -67,41 +68,48 @@ project "Hazel"
 		{
 			"HZ_PLATFORM_WINDOWS",
 			"HZ_BUILD_DLL",
-			"GLFW_INCLUDE_NONE"
+			"GLFW_INCLUDE_NONE",
+			"_CRT_SECURE_NO_WARNINGS",
+			"_SILENCE_STDEXT_ARR_ITERS_DEPRECATION_WARNING"
 
 		}
-		postbuildcommands
-		{
-			 "xcopy /Y /I \"bin\\" .. outputdir .. "\\Hazel\\Hazel.dll\" \"bin\\" .. outputdir .. "\\Sandox\\\""
+		--postbuildcommands
+		--{
+		--	 "xcopy /Y /I \"bin\\" .. outputdir .. "\\Hazel\\Hazel.lib\" \"bin\\" .. outputdir .. "\\Sandox\\\""
 
-		}
+		--}
 
 	filter "configurations:Debug"
 		defines "HZ_DEBUG"
-		symbols "On"
-		buildoptions { "/utf-8","/MDd" }
+		symbols "on"
+		runtime "Debug"
+		buildoptions { "/utf-8"}
 
 
 	filter "configurations:Release"
 		defines "HZ_RELEASE"
-		symbols "On"
-		buildoptions {"/utf-8","/MD"}
+		symbols "on"
+		runtime "Release"
+		optimize "on"
+		buildoptions {"/utf-8",}
 
 
 	filter "configurations:Dist"
 		defines "HZ_DIST"
-		symbols "On"
-		buildoptions {"/utf-8","/MD"}
+		symbols "on"
+		runtime "Release"
+		optimize "on"
+		buildoptions {"/utf-8"}
 
 
-	filter {"system:windows","configurations:Release"}
-		buildoptions {"/utf-8","/MD"}
 
 
 project "Sandox"
 	location "Sandox"
 	kind "ConsoleApp"
 	language "C++"
+	cppdialect "C++17"
+	staticruntime "on"
 
 	targetdir("bin/" .. outputdir .. "/%{prj.name}")
 	objdir("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -116,7 +124,8 @@ project "Sandox"
 	{
 		"vendor/spdlog-1.2.1/include",
 		"src",
-		"%{IncludeDir.glm}"
+		"%{IncludeDir.glm}",
+		"%{IncludeDir.ImGui}"
 	}
 
 	links
@@ -125,30 +134,30 @@ project "Sandox"
 	}
 
 	filter "system:windows"
-		cppdialect "C++17"
 		staticruntime "On"
 		systemversion "latest"
 
 		defines
 		{
 			"HZ_PLATFORM_WINDOWS",
+			"_SILENCE_STDEXT_ARR_ITERS_DEPRECATION_WARNING"
 		}
 
 
 	filter "configurations:Debug"
 		defines "HZ_DEBUG"
-		symbols "On"
-		buildoptions {"/utf-8","/MDd"}
+		symbols "on"
+		buildoptions {"/utf-8"}
 
 	filter "configurations:Release"
 		defines "HZ_RELEASE"
-		symbols "On"
-		buildoptions {"/utf-8","/MD"}
+		symbols "on"
+		buildoptions {"/utf-8"}
 
 	filter "configurations:Dist"
 		defines "HZ_DIST"
-		symbols "On"
-		buildoptions {"/utf-8","/MD"}
+		symbols "on"
+		buildoptions {"/utf-8"}
 
 	filter {"system:windows","configurations:Release"}
-		buildoptions {"/utf-8","/MD"}
+		buildoptions {"/utf-8"}

@@ -1,7 +1,7 @@
 
 #include "hzpch.h"
 #include "Hazel.h"
-
+#include "imgui.h"
 
 #include <glm/vec3.hpp> // glm::vec3
 #include <glm/vec4.hpp> // glm::vec4
@@ -36,6 +36,12 @@ public:
 		{
 			HZ_CLIENT_INFO("TAB");
 		}
+	}
+
+	virtual void OnImGuiRender() override
+	{
+		//ImGui::Begin("Test");
+		//ImGui::Text("Hello World");
 	}
 
 	void OnEvent(Hazel::Event& event) override
