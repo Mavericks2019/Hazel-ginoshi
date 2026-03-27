@@ -1,37 +1,16 @@
 ﻿#include "hzpch.h"
 #include "Application.h"
 #include "Hazel/Log.h"
-#include <glad/glad.h>
 #include "Platform/Windows/WindowsInput.h"
 #include "glm/glm.hpp"
+#include "Hazel/Renderer/RenderCommand.h"
+#include "Hazel/Renderer/Renderer.h"
 
 namespace Hazel {
 
 #define BIND_EVENT_FN(x) std::bind(&Application::x, this, std::placeholders::_1)
 
 	Application* Application::s_Instance = nullptr;
-	
-	static GLenum ShaderDataTypeToOpenGLBaseType(ShaderDataType type)
-	{
-		switch (type)
-		{
-		case ShaderDataType::Float:    return GL_FLOAT;
-		case ShaderDataType::Float2:   return GL_FLOAT;
-		case ShaderDataType::Float3:   return GL_FLOAT;
-		case ShaderDataType::Float4:   return GL_FLOAT;
-		case ShaderDataType::Mat3:     return GL_FLOAT;
-		case ShaderDataType::Mat4:     return GL_FLOAT;
-		case ShaderDataType::Int:      return GL_INT;
-		case ShaderDataType::Int2:     return GL_INT;
-		case ShaderDataType::Int3:     return GL_INT;
-		case ShaderDataType::Int4:     return GL_INT;
-		case ShaderDataType::Bool:     return GL_BOOL;
-		}
-
-		HZ_CORE_ASSERT(false, "Unknown ShaderDataType!");
-		return 0;
-	}
-
 	Application::Application()
 	{
 		HZ_CORE_ASSERT(!Is_Instance, "Application already exists!");
@@ -70,10 +49,10 @@ namespace Hazel {
 		m_SquareVA.reset(VertexArray::Create());
 
 		float suqarevertices[3 * 4] = {
-			-0.5f, -0.75f, 0.0f,
-			 0.5f, -0.75f, 0.0f,
-			 0.5f,  0.75f, 0.0f,
-			 -0.5f,  0.75f, 0.0f,
+			-0.7f, -0.85f, 0.0f,
+			 0.7f, -0.85f, 0.0f,
+			 0.7f,  0.85f, 0.0f,
+			 -0.7f,  0.85f, 0.0f,
 		};
 
 		std::shared_ptr<VertexBuffer> m_SquareVB(VertexBuffer::Create(suqarevertices, sizeof(suqarevertices)));
@@ -193,16 +172,20 @@ namespace Hazel {
 
 		while (m_Running)
 		{
-			glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
-			glClear(GL_COLOR_BUFFER_BIT);
+			RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
+			RenderCommand::Clear();
 
-			m_Shader2->Bind();
-			m_SquareVA->Bind();
-			glDrawElements(GL_TRIANGLES, m_SquareVA->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
+			Renderer::BeginScene();
+			{
+				m_Shader2->Bind();
+				Renderer::Submit(m_SquareVA);
 
-			m_Shader->Bind();
-			m_VertexArray->Bind();
-			glDrawElements(GL_TRIANGLES, m_VertexArray->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
+				m_Shader->Bind();
+				Renderer::Submit(m_VertexArray);
+
+				Renderer::EndScene();
+			}
+			
 
 			for (Layer* layer : m_LayerStack)
 			{
