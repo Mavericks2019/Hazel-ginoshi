@@ -7,6 +7,9 @@
 
 #include "Hazel/ImGui/ImGuiLayer.h"
 
+#include "Hazel/Core/Timestep.h"
+#include "glfw/glfw3.h"
+
 namespace Hazel {
 
 	class Application
@@ -34,6 +37,7 @@ namespace Hazel {
 		LayerStack m_LayerStack;
 	private:
 		static Application* s_Instance;
+		float m_LastFrametime = 0.0f;
 	};
 
 	Application* CreateApplication();

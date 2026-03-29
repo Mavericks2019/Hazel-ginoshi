@@ -120,34 +120,34 @@ public:
 
 		m_Shader2.reset(new Hazel::Shader(vertexSrc2, fragSrc2));
 	}
-	void OnUpdate() override
+	void OnUpdate(Hazel::Timestep ts) override
 	{
-
+		//HZ_CLIENT_TRACE("Detla time: {0}s ({1}ms)",ts.GetSeconds(), ts.GetMilliseconds() );
 		if (Hazel::Input::IsKeyPressed(HZ_KEY_LEFT))
 		{
-			m_CameraPosition.x += m_CameraMoveSpeed;
+			m_CameraPosition.x += m_CameraMoveSpeed * ts;
 		}
 		else if (Hazel::Input::IsKeyPressed(HZ_KEY_RIGHT))
 		{
-			m_CameraPosition.x -= m_CameraMoveSpeed;
+			m_CameraPosition.x -= m_CameraMoveSpeed * ts;;
 		}
 
 		if (Hazel::Input::IsKeyPressed(HZ_KEY_UP))
 		{
-			m_CameraPosition.y -= m_CameraMoveSpeed;
+			m_CameraPosition.y -= m_CameraMoveSpeed * ts;;
 		}
 		else if (Hazel::Input::IsKeyPressed(HZ_KEY_DOWN))
 		{
-			m_CameraPosition.y += m_CameraMoveSpeed;
+			m_CameraPosition.y += m_CameraMoveSpeed * ts;;
 		}
 
 		if (Hazel::Input::IsKeyPressed(HZ_KEY_A))
 		{
-			m_CameraRotation -= m_CameraRotationSpeed;
+			m_CameraRotation -= m_CameraRotationSpeed * ts;;
 		}
 		if (Hazel::Input::IsKeyPressed(HZ_KEY_D))
 		{
-			m_CameraRotation += m_CameraRotationSpeed;
+			m_CameraRotation += m_CameraRotationSpeed * ts;;
 		}
 
 		Hazel::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
@@ -182,7 +182,7 @@ private:
 	glm::vec3 m_CameraPosition;
 	float m_CameraMoveSpeed = 0.1f;
 	float m_CameraRotation = 0.0f;
-	float m_CameraRotationSpeed = 2.f;
+	float m_CameraRotationSpeed = 180.f;
 
 };
 
@@ -192,7 +192,7 @@ public:
 	Sandox() 
 	{
 		PushLayer(new ExampleLayer());
-		//PushOverlay(new Hazel::ImGuiLayer());
+		PushOverlay(new Hazel::ImGuiLayer());
 	}
 	~Sandox() 
 	{
