@@ -1,5 +1,7 @@
 #pragma once
 #include <stdio.h>
+#include <string>
+
 #include "Hazel/Application.h"
 #include "Hazel/Log.h"
 
