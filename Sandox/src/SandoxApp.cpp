@@ -22,7 +22,7 @@ public:
 			 0.0f,  0.5f, 0.0f, 0.8f, 0.8f, 0.2f, 1.0f,
 		};
 
-		std::shared_ptr<Hazel::VertexBuffer> vertexBuffer;
+		Hazel::Ref<Hazel::VertexBuffer> vertexBuffer;
 
 		vertexBuffer.reset(Hazel::VertexBuffer::Create(vertices, sizeof(vertices)));
 
@@ -35,29 +35,30 @@ public:
 		m_VertexArray->AddVertexBuffer(vertexBuffer);
 
 		uint32_t indices[3] = { 0, 1, 2 };
-		std::shared_ptr<Hazel::IndexBuffer> indexBuffer;
+		Hazel::Ref<Hazel::IndexBuffer> indexBuffer;
 		indexBuffer.reset(Hazel::IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t)));
 		m_VertexArray->SetIndexBuffer(indexBuffer);
 
 		m_SquareVA.reset(Hazel::VertexArray::Create());
 
-		float suqarevertices[3 * 4] = {
-			-0.5f, -0.5f, 0.0f,
-			 0.5f, -0.5f, 0.0f,
-			 0.5f,  0.5f, 0.0f,
-			 -0.5f,  0.5f, 0.0f,
+		float suqarevertices[5 * 4] = {
+			-0.5f, -0.5f, 0.0f, 0.0f, 0.0f,
+			 0.5f, -0.5f, 0.0f, 1.0f, 0.0f,
+			 0.5f,  0.5f, 0.0f, 1.0f, 1.0f,
+			-0.5f,  0.5f, 0.0f, 0.0f, 1.0f
 		};
 
-		std::shared_ptr<Hazel::VertexBuffer> m_SquareVB(Hazel::VertexBuffer::Create(suqarevertices, sizeof(suqarevertices)));
+		Hazel::Ref<Hazel::VertexBuffer> m_SquareVB(Hazel::VertexBuffer::Create(suqarevertices, sizeof(suqarevertices)));
 
 		m_SquareVB->SetLayout({
-			{ Hazel::ShaderDataType::Float3, "a_Position"}
+			{ Hazel::ShaderDataType::Float3, "a_Position"},
+			{ Hazel::ShaderDataType::Float2, "a_TexCoord"}
 			});
 		m_SquareVA->AddVertexBuffer(m_SquareVB);
 
 
 		uint32_t squareindices[6] = { 0, 1, 2 ,2, 3, 0 };
-		std::shared_ptr<Hazel::IndexBuffer> m_SquareIB(Hazel::IndexBuffer::Create(squareindices, sizeof(squareindices) / sizeof(uint32_t)));
+		Hazel::Ref<Hazel::IndexBuffer> m_SquareIB(Hazel::IndexBuffer::Create(squareindices, sizeof(squareindices) / sizeof(uint32_t)));
 		m_SquareVA->SetIndexBuffer(m_SquareIB);
 
 		std::string vertexSrc = R"(
@@ -178,7 +179,9 @@ public:
 			}
 		}
 
-		Hazel::Renderer::Submit(m_Shader, m_VertexArray);
+		Hazel::Renderer::Submit(m_flatColorShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
+		//triangle
+		//Hazel::Renderer::Submit(m_Shader, m_VertexArray);
 		Hazel::Renderer::EndScene();
 	}
 
@@ -195,10 +198,10 @@ public:
 	}
 
 private:
-	std::shared_ptr<Hazel::Shader> m_Shader;
-	std::shared_ptr<Hazel::Shader> m_flatColorShader;
-	std::shared_ptr<Hazel::VertexArray> m_VertexArray;
-	std::shared_ptr<Hazel::VertexArray> m_SquareVA;
+	Hazel::Ref<Hazel::Shader> m_Shader;
+	Hazel::Ref<Hazel::Shader> m_flatColorShader, m_TextureShader;
+	Hazel::Ref<Hazel::VertexArray> m_VertexArray;
+	Hazel::Ref<Hazel::VertexArray> m_SquareVA;
 
 	Hazel::OrthographicCamera m_Camera;
 	glm::vec3 m_CameraPosition;
