@@ -6,6 +6,7 @@
 #include "Platform/OpenGL/OpenGLShader.h"
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/gtc/matrix_transform.hpp>
+#include "Hazel/Renderer/Shader.h"
 
 class ExampleLayer : public Hazel::Layer
 {
@@ -92,7 +93,7 @@ public:
 			}
 		)";
 
-		m_Shader.reset(Hazel::Shader::Create(vertexSrc, fragSrc));
+		m_Shader = Hazel::Shader::Create("vertexPoscolor", vertexSrc, fragSrc);
 
 		std::string flatColorShaderVertexSrc = R"(
 			#version 330 core
@@ -161,13 +162,13 @@ public:
 		)";
 
 
-		m_flatColorShader.reset(Hazel::Shader::Create(flatColorShaderVertexSrc, flatColorShaderFragmentSrc));
-		m_TextureShader.reset(Hazel::Shader::Create("assets/shaders/Texture.glsl"));
+		m_flatColorShader = Hazel::Shader::Create("FlatColor", flatColorShaderVertexSrc, flatColorShaderFragmentSrc);
+		auto textureshader = m_ShaderLib.Load("assets/shaders/Texture.glsl");
 		m_Texture = Hazel::Texture2D::Create("assets/textures/Checkerboard.png");
 		m_Texture2 = Hazel::Texture2D::Create("assets/textures/ChernoLogo.png");
 
-		std::dynamic_pointer_cast<Hazel::OpenGLShader>(m_TextureShader)->Bind();
-		std::dynamic_pointer_cast<Hazel::OpenGLShader>(m_TextureShader)->UploadUniformInt("u_Texture", 0);
+		std::dynamic_pointer_cast<Hazel::OpenGLShader>(textureshader)->Bind();
+		std::dynamic_pointer_cast<Hazel::OpenGLShader>(textureshader)->UploadUniformInt("u_Texture", 0);
 
 	}
 	void OnUpdate(Hazel::Timestep ts) override
@@ -220,11 +221,12 @@ public:
 				Hazel::Renderer::Submit(m_flatColorShader, m_SquareVA, transform);
 			}
 		}
+		auto textureshader = m_ShaderLib.Get("Texture");
 
 		m_Texture->Bind();
-		Hazel::Renderer::Submit(m_TextureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
+		Hazel::Renderer::Submit(textureshader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
 		m_Texture2->Bind();
-		Hazel::Renderer::Submit(m_TextureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
+		Hazel::Renderer::Submit(textureshader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
 
 		//triangle
 		//Hazel::Renderer::Submit(m_Shader, m_VertexArray);
@@ -244,8 +246,9 @@ public:
 	}
 
 private:
+	Hazel::ShaderLibrary m_ShaderLib;
 	Hazel::Ref<Hazel::Shader> m_Shader;
-	Hazel::Ref<Hazel::Shader> m_flatColorShader, m_TextureShader;
+	Hazel::Ref<Hazel::Shader> m_flatColorShader;
 	Hazel::Ref<Hazel::VertexArray> m_VertexArray;
 	Hazel::Ref<Hazel::VertexArray> m_SquareVA;
 	Hazel::Ref<Hazel::Texture2D> m_Texture;
