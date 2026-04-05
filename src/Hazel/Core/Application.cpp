@@ -1,6 +1,6 @@
 ﻿#include "hzpch.h"
 #include "Application.h"
-#include "Hazel/Log.h"
+#include "Hazel/Core/Log.h"
 #include "Platform/Windows/WindowsInput.h"
 #include "glm/glm.hpp"
 #include "Hazel/Renderer/Renderer.h"
@@ -87,10 +87,13 @@ namespace Hazel {
 			float time = (float)glfwGetTime(); //Platform::GetTime
 			Timestep timestep = time - m_LastFrametime;
 			m_LastFrametime = time;
-			for (Layer* layer : m_LayerStack)
+			if (!m_Minimized)
 			{
-				layer->OnUpdate(timestep);
-				auto [x, y] = Input::GetMousePosition();
+				for (Layer* layer : m_LayerStack)
+				{
+					layer->OnUpdate(timestep);
+					auto [x, y] = Input::GetMousePosition();
+				}
 			}
 			m_ImGuiLayer->Begin();
 			for (Layer* layer : m_LayerStack)
@@ -98,6 +101,7 @@ namespace Hazel {
 				layer->OnImGuiRender();
 			}
 			m_ImGuiLayer->End();
+
 
 			m_Window->OnUpdate();
 		}

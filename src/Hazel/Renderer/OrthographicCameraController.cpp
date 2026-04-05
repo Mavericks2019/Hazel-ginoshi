@@ -1,8 +1,8 @@
 #include "hzpch.h"
 #include "Hazel/Renderer/OrthographicCameraController.h"
 
-#include "Hazel/input.h"
-#include "KeyCodes.h"
+#include "Hazel/Core/input.h"
+#include "Hazel/Core/KeyCodes.h"
 
 namespace Hazel {
 
@@ -38,9 +38,9 @@ namespace Hazel {
 		if (m_Rotation)
 		{
 			if (Input::IsKeyPressed(HZ_KEY_Q))
-				m_CameraRotation += m_CameraRotationSpeed * ts;
-			if (Input::IsKeyPressed(HZ_KEY_E))
 				m_CameraRotation -= m_CameraRotationSpeed * ts;
+			if (Input::IsKeyPressed(HZ_KEY_E))
+				m_CameraRotation += m_CameraRotationSpeed * ts;
 
 			//if (m_CameraRotation > 180.0f)
 			//	m_CameraRotation -= 360.0f;

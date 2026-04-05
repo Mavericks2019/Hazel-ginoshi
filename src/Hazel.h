@@ -2,16 +2,16 @@
 #include <stdio.h>
 #include <string>
 
-#include "Hazel/Application.h"
-#include "Hazel/Log.h"
+#include "Hazel/Core/Application.h"
+#include "Hazel/Core/Log.h"
 
-#include "Hazel/Input.h"
-#include "MouseButtonCodes.h"
-#include "KeyCodes.h"
+#include "Hazel/Core/input.h"
+#include "Hazel/Core/MouseButtonCodes.h"
+#include "Hazel/Core/KeyCodes.h"
 
 #include "Hazel/ImGui/ImGuiLayer.h"
 
-#include "Hazel/EntryPoint.h"
+#include "Hazel/Core/EntryPoint.h"
 
 // ---Renderer------------------------
 #include "Hazel/Renderer/Renderer.h"
