@@ -11,8 +11,6 @@
 
 #include "Hazel/ImGui/ImGuiLayer.h"
 
-#include "Hazel/Core/EntryPoint.h"
-
 // ---Renderer------------------------
 #include "Hazel/Renderer/Renderer.h"
 #include "Hazel/Renderer/RenderCommand.h"
