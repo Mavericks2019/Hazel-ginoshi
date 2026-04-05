@@ -11,7 +11,7 @@ namespace Hazel {
 	class OrthographicCameraController
 	{
 	public:
-		OrthographicCameraController(float aspectRatio, bool rotation = false);
+		OrthographicCameraController(float aspectRatio, bool rotation = true);
 
 		void OnUpdate(Timestep ts);
 		void OnEvent(Event& e);
