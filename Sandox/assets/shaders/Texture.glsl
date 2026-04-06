@@ -20,12 +20,12 @@ void main()
 #version 330 core
 layout(location = 0) out vec4 color;
 
-in vec3 v_Position;
 in vec2 v_TextCoord;
 
+uniform vec4 u_Color;
 uniform sampler2D u_Texture;
 
 void main()
 {
-	color = texture(u_Texture, v_TextCoord * 10.0);
+	color = texture(u_Texture, v_TextCoord * 10.0) * u_Color;
 }

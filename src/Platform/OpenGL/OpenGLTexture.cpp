@@ -37,9 +37,11 @@ namespace Hazel {
 		: m_Specification(specification), m_Width(m_Specification.Width), m_Height(m_Specification.Height)
 	{
 
-		m_InternalFormat = Utils::HazelImageFormatToGLInternalFormat(m_Specification.Format);
-		m_DataFormat = Utils::HazelImageFormatToGLDataFormat(m_Specification.Format);
+		//m_InternalFormat = Utils::HazelImageFormatToGLInternalFormat(m_Specification.Format);
+		//m_DataFormat = Utils::HazelImageFormatToGLDataFormat(m_Specification.Format);
 
+		m_InternalFormat = GL_RGBA8;
+		m_DataFormat = GL_RGBA;
 		glCreateTextures(GL_TEXTURE_2D, 1, &m_RendererID);
 		glTextureStorage2D(m_RendererID, 1, m_InternalFormat, m_Width, m_Height);
 

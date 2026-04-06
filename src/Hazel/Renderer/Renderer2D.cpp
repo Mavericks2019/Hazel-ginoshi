@@ -146,7 +146,11 @@ namespace Hazel {
 		Ref<IndexBuffer> m_SquareIB(IndexBuffer::Create(squareindices, sizeof(squareindices) / sizeof(uint32_t)));
 		s_Data->QuadVertexArray->SetIndexBuffer(m_SquareIB);
 
-		s_Data->QuadShader = Shader::Create("assets/shaders/FlatColor.glsl");
+		TextureSpecification ts;
+		s_Data->WhiteTexture = Texture2D::Create(ts);
+		uint32_t whiteTextureData = 0xffffffff;
+		s_Data->WhiteTexture->SetData(&whiteTextureData,sizeof(uint32_t));
+
 		s_Data->TextureShader = Shader::Create("assets/shaders/Texture.glsl");
 		s_Data->TextureShader->Bind();
 		s_Data->TextureShader->SetInt("u_Texture", 0);
@@ -159,8 +163,6 @@ namespace Hazel {
 
 	void Renderer2D::BeginScene(const OrthographicCamera& camera)
 	{
-		s_Data->QuadShader->Bind();
-		s_Data->QuadShader->SetMat4("u_ViewProjection", camera.GetViewProjectionMatrix());
 		s_Data->TextureShader->Bind();
 		s_Data->TextureShader->SetMat4("u_ViewProjection", camera.GetViewProjectionMatrix());
 	}
@@ -188,12 +190,13 @@ namespace Hazel {
 	void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, const glm::vec4& color)
 	{
 		HZ_PROFILE_FUNCTION();
-		s_Data->QuadShader->Bind();
-		s_Data->QuadShader->SetFloat4("u_Color", color);
+		s_Data->TextureShader->SetFloat4("u_Color", color);
+		// bind white
+		s_Data->WhiteTexture->Bind();
 
 		glm::mat4 transform = glm::translate(glm::mat4(1.0f), position)
 			* glm::scale(glm::mat4(1.0f), { size.x, size.y, 1.0f });
-		s_Data->QuadShader->SetMat4("u_Transform", transform);
+		s_Data->TextureShader->SetMat4("u_Transform", transform);
 		RenderCommand::DrawIndexed(s_Data->QuadVertexArray);
 
 	}
@@ -206,12 +209,12 @@ namespace Hazel {
 	void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, const Ref<Texture2D>& texture, float tilingFactor, const glm::vec4& tintColor)
 	{
 		HZ_PROFILE_FUNCTION();
-		s_Data->TextureShader->Bind();
+		s_Data->TextureShader->SetFloat4("u_Color", glm::vec4(1.0f));
+		texture->Bind();
 
 		glm::mat4 transform = glm::translate(glm::mat4(1.0f), position)
 			* glm::scale(glm::mat4(1.0f), { size.x, size.y, 1.0f });
 		s_Data->TextureShader->SetMat4("u_Transform", transform);
-		texture->Bind();
 		RenderCommand::DrawIndexed(s_Data->QuadVertexArray);
 
 
