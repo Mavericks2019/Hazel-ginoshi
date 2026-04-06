@@ -31,8 +31,6 @@ namespace Hazel {
 
 	void OpenGLContext::SwapBuffers()
 	{
-		
-
 		glfwSwapBuffers(m_WindowHandle);
 	}
 
