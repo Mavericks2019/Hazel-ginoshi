@@ -8,6 +8,8 @@ namespace Hazel {
 
 	Ref<VertexArray> VertexArray::Create()
 	{
+		HZ_PROFILE_FUNCTION();
+
 		switch (Renderer::GetAPI())
 		{
 			case RendererAPI::API::None:    HZ_CORE_ASSERT(false, "RendererAPI::None is currently not supported!"); return nullptr;

@@ -11,10 +11,14 @@ namespace Hazel {
 
 	void Renderer::Init()
 	{
+		HZ_PROFILE_FUNCTION();
 		RenderCommand::Init();
 		Renderer2D::Init();
 	}
-
+	void Renderer::Shutdown()
+	{
+		Renderer2D::Shutdown();
+	}
 	void Renderer::BeginScene(OrthographicCamera& camera)
 	{
 		m_SceneData->ViewProjectionMatrix = camera.GetViewProjectionMatrix();

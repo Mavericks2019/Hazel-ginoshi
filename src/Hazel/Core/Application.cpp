@@ -12,23 +12,27 @@ namespace Hazel {
 	Application* Application::s_Instance = nullptr;
 	Application::Application()
 	{
+		HZ_PROFILE_FUNCTION();
 		HZ_CORE_ASSERT(!Is_Instance, "Application already exists!");
 		s_Instance = this;
-		m_Window = std::unique_ptr<Window>(Window::Create());
+		m_Window = Window::Create();
 		m_Window->SetEventCallback(BIND_EVENT_FN(OnEvent));
 
 		Renderer::Init();
 		m_Window->SetVSync(false);
-		//m_ImGuiLayer = new ImGuiLayer;
-		//PushOverlay(m_ImGuiLayer);
+		m_ImGuiLayer = new ImGuiLayer;
+		PushOverlay(m_ImGuiLayer);
 	}
 
 	Application::~Application()
 	{
+		HZ_PROFILE_FUNCTION();
+		Renderer::Shutdown();
 	}
 
 	void Application::PushLayer(Layer* layer)
 	{
+		HZ_PROFILE_FUNCTION();
 
 		m_LayerStack.PushLayer(layer);
 		layer->OnAttach();
@@ -36,6 +40,8 @@ namespace Hazel {
 
 	void Application::PushOverlay(Layer* layer)
 	{
+		HZ_PROFILE_FUNCTION();
+
 		m_LayerStack.PushOverlay(layer);
 		layer->OnAttach();
 	}
@@ -66,6 +72,7 @@ namespace Hazel {
 
 	bool Application::OnWindowResize(WindowResizeEvent& e)
 	{
+		HZ_PROFILE_FUNCTION();
 
 		if (e.GetWidth() == 0 || e.GetHeight() == 0)
 		{
@@ -81,9 +88,12 @@ namespace Hazel {
 
 	void Application::Run()
 	{
+		HZ_PROFILE_FUNCTION();
 
 		while (m_Running)
 		{
+			HZ_PROFILE_SCOPE("RunLoop");
+
 			float time = (float)glfwGetTime(); //Platform::GetTime
 			Timestep timestep = time - m_LastFrametime;
 			m_LastFrametime = time;
@@ -91,16 +101,23 @@ namespace Hazel {
 			{
 				for (Layer* layer : m_LayerStack)
 				{
-					layer->OnUpdate(timestep);
-					auto [x, y] = Input::GetMousePosition();
+					{
+						HZ_PROFILE_SCOPE("LayerZStack Onupdate");
+						layer->OnUpdate(timestep);
+						auto [x, y] = Input::GetMousePosition();
+					}
 				}
+				m_ImGuiLayer->Begin();
+				{
+					HZ_PROFILE_SCOPE("LayerZStack OnImguiRender");
+					for (Layer* layer : m_LayerStack)
+					{
+						layer->OnImGuiRender();
+					}
+				}
+				m_ImGuiLayer->End();
 			}
-			m_ImGuiLayer->Begin();
-			for (Layer* layer : m_LayerStack)
-			{
-				layer->OnImGuiRender();
-			}
-			m_ImGuiLayer->End();
+
 
 
 			m_Window->OnUpdate();

@@ -28,6 +28,7 @@ namespace Hazel {
 
 	void LayerStack::PopLayer(Layer* layer)
 	{
+
 		auto it = std::find(m_Layers.begin(), m_Layers.begin() + m_LayerInsertIndex, layer);
 		if (it != m_Layers.begin() + m_LayerInsertIndex)
 		{
@@ -39,6 +40,8 @@ namespace Hazel {
 
 	void LayerStack::PopOverlay(Layer* overlay)
 	{
+		HZ_PROFILE_FUNCTION();
+
 		auto it = std::find(m_Layers.begin(), m_Layers.end(), overlay);
 		if (it != m_Layers.end())
 		{

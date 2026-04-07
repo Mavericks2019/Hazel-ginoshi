@@ -9,7 +9,7 @@ class Sandox : public Hazel::Application
 public:
     Sandox()
     {
-        PushOverlay(new Hazel::ImGuiLayer());
+        //PushOverlay(new Hazel::ImGuiLayer());
         // PushLayer(new ExampleLayer());
         PushLayer(new Sandbox2D());
     }
