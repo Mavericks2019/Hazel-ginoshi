@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="GameLayer">
+      <UniqueIdentifier>{1CF84C7D-8862-01F4-D1A0-B2993D4ADF48}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\ExampleLayer.h" />
+    <ClInclude Include="src\GameLayer\Color.h">
+      <Filter>GameLayer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameLayer\GameLayer.h">
+      <Filter>GameLayer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameLayer\Level.h">
+      <Filter>GameLayer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameLayer\ParticleSystem.h">
+      <Filter>GameLayer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameLayer\Player.h">
+      <Filter>GameLayer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameLayer\Random.h">
+      <Filter>GameLayer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Sandbox2D.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\ExampleLayer.cpp" />
+    <ClCompile Include="src\GameLayer\GameLayer.cpp">
+      <Filter>GameLayer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameLayer\Level.cpp">
+      <Filter>GameLayer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameLayer\ParticleSystem.cpp">
+      <Filter>GameLayer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameLayer\Player.cpp">
+      <Filter>GameLayer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameLayer\Random.cpp">
+      <Filter>GameLayer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Sandbox2D.cpp" />
+    <ClCompile Include="src\SandoxApp.cpp" />
+  </ItemGroup>
+</Project>

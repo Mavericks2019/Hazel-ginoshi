@@ -107,19 +107,16 @@ namespace Hazel {
 						auto [x, y] = Input::GetMousePosition();
 					}
 				}
-				m_ImGuiLayer->Begin();
-				{
-					HZ_PROFILE_SCOPE("LayerZStack OnImguiRender");
-					for (Layer* layer : m_LayerStack)
-					{
-						layer->OnImGuiRender();
-					}
-				}
-				m_ImGuiLayer->End();
 			}
-
-
-
+			m_ImGuiLayer->Begin();
+			{
+				HZ_PROFILE_SCOPE("LayerZStack OnImguiRender");
+				for (Layer* layer : m_LayerStack)
+				{
+					layer->OnImGuiRender();
+				}
+			}
+			m_ImGuiLayer->End();
 			m_Window->OnUpdate();
 		}
 	}

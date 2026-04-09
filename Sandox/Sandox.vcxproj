@@ -129,7 +129,22 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\ExampleLayer.h" />
+    <ClInclude Include="src\GameLayer\Color.h" />
+    <ClInclude Include="src\GameLayer\GameLayer.h" />
+    <ClInclude Include="src\GameLayer\Level.h" />
+    <ClInclude Include="src\GameLayer\ParticleSystem.h" />
+    <ClInclude Include="src\GameLayer\Player.h" />
+    <ClInclude Include="src\GameLayer\Random.h" />
+    <ClInclude Include="src\Sandbox2D.h" />
+  </ItemGroup>
+  <ItemGroup>
     <ClCompile Include="src\ExampleLayer.cpp" />
+    <ClCompile Include="src\GameLayer\GameLayer.cpp" />
+    <ClCompile Include="src\GameLayer\Level.cpp" />
+    <ClCompile Include="src\GameLayer\ParticleSystem.cpp" />
+    <ClCompile Include="src\GameLayer\Player.cpp" />
+    <ClCompile Include="src\GameLayer\Random.cpp" />
     <ClCompile Include="src\Sandbox2D.cpp" />
     <ClCompile Include="src\SandoxApp.cpp" />
   </ItemGroup>
@@ -137,10 +152,6 @@
     <ProjectReference Include="..\Hazel.vcxproj">
       <Project>{99294D0D-053E-75BE-CEBF-181E3A9371EF}</Project>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="src\ExampleLayer.h" />
-    <ClInclude Include="src\Sandbox2D.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
