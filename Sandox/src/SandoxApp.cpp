@@ -12,8 +12,8 @@ public:
     {
         //PushOverlay(new Hazel::ImGuiLayer());
         //PushLayer(new ExampleLayer());
-        PushLayer(new GameLayer());
-        //PushLayer(new Sandbox2D());
+        //PushLayer(new GameLayer());
+        PushLayer(new Sandbox2D());
     }
     ~Sandox() {}
 };
