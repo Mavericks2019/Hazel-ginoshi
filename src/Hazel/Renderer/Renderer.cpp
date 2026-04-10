@@ -3,6 +3,7 @@
 #include "Platform/OpenGL/OpenGLShader.h"
 #include "Platform/OpenGL/OpenGLTexture.h"
 #include "Renderer2D.h"
+#include "RendererOld2D.h"
 
 
 namespace Hazel {
@@ -14,6 +15,7 @@ namespace Hazel {
 		HZ_PROFILE_FUNCTION();
 		RenderCommand::Init();
 		Renderer2D::Init();
+		RendererOld2D::Init();
 	}
 	void Renderer::Shutdown()
 	{

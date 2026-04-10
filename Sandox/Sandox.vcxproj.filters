@@ -7,14 +7,44 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\ExampleLayer.h" />
+    <ClInclude Include="src\GameLayer\Color.h">
+      <Filter>GameLayer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameLayer\GameLayer.h">
+      <Filter>GameLayer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameLayer\Level.h">
+      <Filter>GameLayer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameLayer\ParticleSystem.h">
+      <Filter>GameLayer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameLayer\Player.h">
+      <Filter>GameLayer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameLayer\Random.h">
+      <Filter>GameLayer</Filter>
+    </ClInclude>
     <ClInclude Include="src\Sandbox2D.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\ExampleLayer.cpp" />
+    <ClCompile Include="src\GameLayer\GameLayer.cpp">
+      <Filter>GameLayer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameLayer\Level.cpp">
+      <Filter>GameLayer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameLayer\ParticleSystem.cpp">
+      <Filter>GameLayer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameLayer\Player.cpp">
+      <Filter>GameLayer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameLayer\Random.cpp">
+      <Filter>GameLayer</Filter>
+    </ClCompile>
     <ClCompile Include="src\Sandbox2D.cpp" />
     <ClCompile Include="src\SandoxApp.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="assets\shaders\Texture.glsl" />
   </ItemGroup>
 </Project>
