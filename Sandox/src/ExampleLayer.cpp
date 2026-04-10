@@ -15,7 +15,7 @@ ExampleLayer::ExampleLayer()
     };
 
     Hazel::Ref<Hazel::VertexBuffer> vertexBuffer;
-    vertexBuffer.reset(Hazel::VertexBuffer::Create(vertices, sizeof(vertices)));
+    vertexBuffer = Hazel::VertexBuffer::Create(vertices, sizeof(vertices));
 
     Hazel::BufferLayout layout = {
         { Hazel::ShaderDataType::Float3, "a_Position" },
@@ -26,7 +26,7 @@ ExampleLayer::ExampleLayer()
 
     uint32_t indices[3] = { 0, 1, 2 };
     Hazel::Ref<Hazel::IndexBuffer> indexBuffer;
-    indexBuffer.reset(Hazel::IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t)));
+    indexBuffer = Hazel::IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t));
     m_VertexArray->SetIndexBuffer(indexBuffer);
 
     m_SquareVA = Hazel::VertexArray::Create();

@@ -56,6 +56,7 @@ namespace Hazel {
 		vertexArray->Bind();
 		uint32_t count = indexCount ? indexCount : vertexArray->GetIndexBuffer()->GetCount();
 		glDrawElements(GL_TRIANGLES, count, GL_UNSIGNED_INT, nullptr);
+
 	}
 
 	void OpenGLRendererAPI::DrawLines(const Hazel::Ref<VertexArray>& vertexArray, uint32_t vertexCount)
