@@ -95,7 +95,7 @@ project "Hazel"
 		defines "HZ_RELEASE"
 		symbols "on"
 		runtime "Release"
-		optimize "on"
+		optimize "Full"
 		buildoptions {"/utf-8",}
 
 
@@ -103,7 +103,7 @@ project "Hazel"
 		defines "HZ_DIST"
 		symbols "on"
 		runtime "Release"
-		optimize "on"
+		optimize "Full"
 		buildoptions {"/utf-8"}
 
 
@@ -149,20 +149,25 @@ project "Sandox"
 		}
 
 
-	filter "configurations:Debug"
-		defines "HZ_DEBUG"
-		symbols "on"
-		buildoptions {"/utf-8"}
+    filter "configurations:Debug"
+        defines "HZ_DEBUG"
+        symbols "on"
+        runtime "Debug"
+        buildoptions {"/utf-8"}
 
-	filter "configurations:Release"
-		defines "HZ_RELEASE"
-		symbols "on"
-		buildoptions {"/utf-8"}
+    filter "configurations:Release"
+        defines "HZ_RELEASE"
+        symbols "on"
+        runtime "Release"
+		optimize "Full"
+        buildoptions {"/utf-8"}
 
-	filter "configurations:Dist"
-		defines "HZ_DIST"
-		symbols "on"
-		buildoptions {"/utf-8"}
+    filter "configurations:Dist"
+        defines "HZ_DIST"
+        symbols "on"
+        runtime "Release"
+		optimize "Full"
+        buildoptions {"/utf-8"}
 
-	filter {"system:windows","configurations:Release"}
-		buildoptions {"/utf-8"}
+    filter {"system:windows","configurations:Release"}
+        buildoptions {"/utf-8"}
