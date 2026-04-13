@@ -33,7 +33,7 @@ void Player::OnUpdate(Hazel::Timestep ts)
 {
 	m_Time += ts;
 
-	if (Input::IsKeyPressed(HZ_KEY_SPACE))
+	if (Input::IsKeyPressed(HZ_KEY_SPACE) || Hazel::Input::IsMouseButtonPressed(HZ_MOUSE_BUTTON_LEFT))
 	{
 		m_Velocity.y += m_EnginePower;
 		if (m_Velocity.y < 0.0f)
