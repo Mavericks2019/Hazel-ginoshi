@@ -66,7 +66,7 @@ project "Hazel"
 
 	filter "system:windows"
 		cppdialect "C++17"
-		staticruntime "On"
+		staticruntime "on"
 		systemversion "latest"
 
 		defines
@@ -78,6 +78,7 @@ project "Hazel"
 			"_SILENCE_STDEXT_ARR_ITERS_DEPRECATION_WARNING"
 
 		}
+
 		--postbuildcommands
 		--{
 		--	 "xcopy /Y /I \"bin\\" .. outputdir .. "\\Hazel\\Hazel.lib\" \"bin\\" .. outputdir .. "\\Sandox\\\""
@@ -139,7 +140,7 @@ project "Sandox"
 	}
 
 	filter "system:windows"
-		staticruntime "On"
+		staticruntime "on"
 		systemversion "latest"
 
 		defines
@@ -147,6 +148,7 @@ project "Sandox"
 			"HZ_PLATFORM_WINDOWS",
 			"_SILENCE_STDEXT_ARR_ITERS_DEPRECATION_WARNING"
 		}
+
 
 
     filter "configurations:Debug"
