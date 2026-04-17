@@ -25,6 +25,9 @@ private:
 	Hazel::Ref<Hazel::VertexArray> m_VertexArray;
 	Hazel::Ref<Hazel::Texture2D> m_CheckerboardTexture;
 	Hazel::Ref<Hazel::Texture2D> m_SpriteSheet;
+	Hazel::Ref<Hazel::SubTexture2D> m_TextureStairs;
+	Hazel::Ref<Hazel::SubTexture2D> m_TextureBarrel;
+	Hazel::Ref<Hazel::SubTexture2D> m_TextureTree;
 
 	Hazel::Ref<Hazel::Texture2D> m_Texture;
 
