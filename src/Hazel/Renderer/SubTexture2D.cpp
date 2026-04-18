@@ -6,7 +6,6 @@ namespace Hazel {
 	SubTexture2D::SubTexture2D(const Ref<Texture2D>& texture, const glm::vec2& min, const glm::vec2& max)
 		: m_Texture(texture)
 	{
-		// Texture coordinates in order: bottom-left, bottom-right, top-right, top-left
 		m_TexCoords[0] = { min.x, min.y }; // bottom-left
 		m_TexCoords[1] = { max.x, min.y }; // bottom-right
 		m_TexCoords[2] = { max.x, max.y }; // top-right
