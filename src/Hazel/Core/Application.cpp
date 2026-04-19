@@ -10,12 +10,12 @@ namespace Hazel {
 #define BIND_EVENT_FN(x) std::bind(&Application::x, this, std::placeholders::_1)
 
 	Application* Application::s_Instance = nullptr;
-	Application::Application()
+	Application::Application(const std::string& name)
 	{
 		HZ_PROFILE_FUNCTION();
 		HZ_CORE_ASSERT(!Is_Instance, "Application already exists!");
 		s_Instance = this;
-		m_Window = Window::Create();
+		m_Window = Window::Create(WindowProps(name));
 		m_Window->SetEventCallback(BIND_EVENT_FN(OnEvent));
 
 		Renderer::Init();
