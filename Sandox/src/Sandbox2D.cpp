@@ -38,6 +38,12 @@ void Sandbox2D::OnAttach()
 {
     HZ_PROFILE_FUNCTION();
     m_CheckerboardTexture = Hazel::Texture2D::Create("assets/textures/Checkerboard.png");
+
+    Hazel::FramebufferSpecification fbSpec;
+    fbSpec.Width = 1280;
+    fbSpec.Height = 720;
+    m_Framebuffer = Hazel::Framebuffer::Create(fbSpec);
+
     m_SpriteSheet = Hazel::Texture2D::Create("assets/game/textures/RPGpack_sheet_2X.png");
     m_Particle.ColorBegin = { 254 / 255.0f, 212 / 255.0f, 123 / 255.0f, 1.0f };
     m_Particle.ColorEnd = { 254 / 255.0f, 109 / 255.0f, 41 / 255.0f, 1.0f };
@@ -72,12 +78,13 @@ void Sandbox2D::OnUpdate(Hazel::Timestep ts)
     Hazel::Renderer2D::ResetStats();
     {
         HZ_PROFILE_SCOPE("Renderer Prep");
+        m_Framebuffer->Bind();
         Hazel::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
         Hazel::RenderCommand::Clear();
     }
     {
         static float rotation = 0.0f;
-        rotation += ts * 40.0f;
+        rotation += ts * 50.0f;
 
         HZ_PROFILE_SCOPE("Renderer Draw");
         Hazel::Renderer2D::BeginScene(m_CameraController.GetCamera());
@@ -85,7 +92,7 @@ void Sandbox2D::OnUpdate(Hazel::Timestep ts)
         Hazel::Renderer2D::DrawQuad({ -1.0f, 0.0f }, {0.8f, 0.8f}, { 0.8f, 0.2f, 0.3f, 1.0f });
         Hazel::Renderer2D::DrawQuad({ 0.5f, -0.5f }, { 0.5f, 0.75f }, m_SquareColor);
         Hazel::Renderer2D::DrawQuad({ -0.0f, -0.0f, -0.1f }, { 20.0f, 20.0f }, m_CheckerboardTexture, 10.0f);
-        Hazel::Renderer2D::DrawRotatedQuad({ -2.0f, 0.0f, 0.0f }, { 1.0f, 1.0f }, rotation, m_TextureStairs, 1.0f);
+        Hazel::Renderer2D::DrawRotatedQuad({ -2.0f, 0.0f, 0.0f }, { 1.0f, 1.0f }, rotation, m_CheckerboardTexture, 10.0f);
         //Hazel::Renderer2D::EndScene();
 
         //Hazel::Renderer2D::BeginScene(m_CameraController.GetCamera());
@@ -97,7 +104,7 @@ void Sandbox2D::OnUpdate(Hazel::Timestep ts)
                 Hazel::Renderer2D::DrawQuad({ x, y }, { 0.45f, 0.45f }, color);
             }
         }
-        //Hazel::Renderer2D::EndScene();
+        Hazel::Renderer2D::EndScene();
 
     }
 #if 0
@@ -119,6 +126,8 @@ void Sandbox2D::OnUpdate(Hazel::Timestep ts)
 
     m_ParticleSystem.OnUpdate(ts);
     m_ParticleSystem.OnRender(m_CameraController.GetCamera());
+
+
     Hazel::Renderer2D::BeginScene(m_CameraController.GetCamera());
 
     for (uint32_t y = 0; y < m_MapHeight; y++)
@@ -136,12 +145,13 @@ void Sandbox2D::OnUpdate(Hazel::Timestep ts)
     }
 #endif
 
-
     //Hazel::Renderer2D::DrawQuad({ 0.0f, 0.0f, 0.5f }, { 1.0f, 1.0f }, m_TextureStairs);
     //Hazel::Renderer2D::DrawQuad({ 1.0f, 0.0f, 0.5f }, { 1.0f, 1.0f }, m_TextureBarrel);
     //Hazel::Renderer2D::DrawQuad({ -1.0f, 0.0f, 0.5f }, { 1.0f, 2.0f }, m_TextureTree);
 
     Hazel::Renderer2D::EndScene();
+    m_Framebuffer->Unbind();
+
 }
 
 void Sandbox2D::OnImGuiRender()
@@ -194,7 +204,7 @@ void Sandbox2D::OnImGuiRender()
         {
             if (ImGui::BeginMenu("File"))
             {
-                if (ImGui::MenuItem("Exit")) Hazel::Application::Get().Close();
+                if (ImGui::MenuItem("Exit")) Hazel::Application::Get().Close(); ;
                 ImGui::EndMenu();
             }
 
@@ -211,8 +221,9 @@ void Sandbox2D::OnImGuiRender()
 
         ImGui::ColorEdit4("Square Color", glm::value_ptr(m_SquareColor));
 
-        uint32_t textureID = m_CheckerboardTexture->GetRendererID();
-        ImGui::Image((void*)textureID, ImVec2{ 256.0f, 256.0f });
+        uint32_t textureID = m_Framebuffer->GetColorAttachmentRendererID();
+        ImGui::Image((void*)textureID, ImVec2{ 1280, 720 });
+
         ImGui::End();
         ImGui::End();
     }
@@ -229,7 +240,7 @@ void Sandbox2D::OnImGuiRender()
         ImGui::ColorEdit4("Square Color", glm::value_ptr(m_SquareColor));
 
         uint32_t textureID = m_CheckerboardTexture->GetRendererID();
-        ImGui::Image((void*)textureID, ImVec2{ 256.0f, 256.0f });
+        ImGui::Image((void*)textureID, ImVec2{ 1280, 720 });
         ImGui::End();
     }
 
