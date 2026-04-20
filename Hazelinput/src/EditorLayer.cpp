@@ -18,8 +18,8 @@ namespace Hazel {
 		m_CheckerboardTexture = Hazel::Texture2D::Create("assets/textures/Checkerboard.png");
 
 		Hazel::FramebufferSpecification fbSpec;
-		fbSpec.Width = 1280;
-		fbSpec.Height = 720;
+		fbSpec.Width = 1920;
+		fbSpec.Height = 1080;
 		m_Framebuffer = Hazel::Framebuffer::Create(fbSpec);
 	}
 
@@ -75,7 +75,7 @@ namespace Hazel {
 	{
 		HZ_PROFILE_FUNCTION();
 
-		static bool dockingEnabled = true;
+		static bool dockingEnabled = false;
 		if (dockingEnabled)
 		{
 			static bool dockspaceOpen = true;

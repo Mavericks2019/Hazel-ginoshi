@@ -1,7 +1,8 @@
 ﻿#include "hzpch.h"
 #include "Application.h"
 #include "Hazel/Core/Log.h"
-#include "Platform/Windows/WindowsInput.h"
+#include "Hazel/Core/Input.h"
+
 #include "glm/glm.hpp"
 #include "Hazel/Renderer/Renderer.h"
 

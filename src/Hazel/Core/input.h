@@ -1,49 +1,19 @@
 #pragma once
 
-#include "Hazel/Core/Core.h"
+#include "Core.h"
+#include "KeyCodes.h"
+#include "MouseButtonCodes.h"
 
 namespace Hazel {
 
-	class HAZEL_API Input
+	class Input
 	{
-	protected:
-		Input() = default;
 	public:
-		virtual ~Input() = default;
+		static bool IsKeyPressed(KeyCode key);
 
-		Input(const Input&) = delete;
-		Input& operator=(const Input&) = delete;
-	public:
-		inline static bool IsKeyPressed(int KeyCode) 
-		{ 
-			return s_Instance->IsKeyPressedImpl(KeyCode); 
-		}
-		inline static bool IsMouseButtonPressed(int button) 
-		{
-			return s_Instance->IsMouseButtonPressedImpl(button);
-		};
-		inline static float GetMouseX() 
-		{
-			return s_Instance->GetMouseXImpl();
-		};
-		inline static float GetMouseY() 
-		{ 
-			return s_Instance->GetMouseYImpl();
-		};
-
-		inline static std::pair<float, float> GetMousePosition()
-		{
-			return s_Instance->GetMousePositionImpl();
-		};
-	protected:
-		virtual bool IsKeyPressedImpl(int KeyCode) = 0;
-		virtual bool IsMouseButtonPressedImpl(int button) = 0;
-		virtual float GetMouseXImpl() = 0;
-		virtual float GetMouseYImpl() = 0;
-		virtual std::pair<float, float> GetMousePositionImpl() = 0;
-
-
-	private:
-		static Input* s_Instance;
+		static bool IsMouseButtonPressed(MouseCode button);
+		static std::pair<float, float> GetMousePosition();
+		static float GetMouseX();
+		static float GetMouseY();
 	};
 }

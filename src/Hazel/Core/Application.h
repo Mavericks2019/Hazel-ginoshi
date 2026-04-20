@@ -17,7 +17,6 @@ namespace Hazel {
 	public:
 		Application(const std::string& name = "Hazel App");
 		virtual ~Application();
-		void Run();
 		void OnEvent(Event& e);
 
 		void PushLayer(Layer* layer);
@@ -25,10 +24,11 @@ namespace Hazel {
 		void Close();
 		inline static Application& Get() { return *s_Instance; }
 		inline Window& GetWindow() { return *m_Window; }
+		ImGuiLayer* GetImGuiLayer() { return m_ImGuiLayer; }
+		void Run();
 	private:
 		Scope<Window> m_Window;
 		ImGuiLayer* m_ImGuiLayer;
-
 		bool m_Running = true;
 		bool m_Minimized = false;
 
