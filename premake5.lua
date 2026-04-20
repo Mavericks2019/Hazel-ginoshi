@@ -1,5 +1,6 @@
 ﻿workspace "Hazel"
 	architecture "x64"
+	startproject "Hazelinut"
 
 	configurations
 	{
@@ -177,8 +178,8 @@ project "Sandox"
         buildoptions {"/utf-8"}
 
 
-project "Hazel-Editor"
-	location "Hazel-Editor"
+project "Hazelinput"
+	location "Hazelinput"
 	kind "ConsoleApp"
 	language "C++"
 	cppdialect "C++17"

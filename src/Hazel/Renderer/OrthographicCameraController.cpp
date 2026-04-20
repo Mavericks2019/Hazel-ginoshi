@@ -88,7 +88,6 @@ namespace Hazel {
 	bool OrthographicCameraController::OnWindowResized(WindowResizeEvent& e)
 	{
 		HZ_PROFILE_FUNCTION();
-		m_Bounds = { -m_AspectRatio * m_ZoomLevel, m_AspectRatio * m_ZoomLevel, -m_ZoomLevel, m_ZoomLevel };
 		OnResize((float)e.GetWidth(), (float)e.GetHeight());
 		return false;
 	}
