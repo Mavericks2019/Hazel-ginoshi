@@ -76,7 +76,8 @@ project "Hazel"
 			"HZ_BUILD_DLL",
 			"GLFW_INCLUDE_NONE",
 			"_CRT_SECURE_NO_WARNINGS",
-			"_SILENCE_STDEXT_ARR_ITERS_DEPRECATION_WARNING"
+			"_SILENCE_STDEXT_ARR_ITERS_DEPRECATION_WARNING",
+			"HZ_PROFILE=1"
 
 		}
 
@@ -147,7 +148,8 @@ project "Sandox"
 		defines
 		{
 			"HZ_PLATFORM_WINDOWS",
-			"_SILENCE_STDEXT_ARR_ITERS_DEPRECATION_WARNING"
+			"_SILENCE_STDEXT_ARR_ITERS_DEPRECATION_WARNING",
+			"HZ_PROFILE=1"
 		}
 
 		postbuildcommands { 'xcopy /Y /I /E "%{prj.location}/assets" "%{cfg.targetdir}/assets"' }
@@ -212,7 +214,8 @@ project "Hazelinput"
 		defines
 		{
 			"HZ_PLATFORM_WINDOWS",
-			"_SILENCE_STDEXT_ARR_ITERS_DEPRECATION_WARNING"
+			"_SILENCE_STDEXT_ARR_ITERS_DEPRECATION_WARNING",
+			"HZ_PROFILE=1"
 		}
 
 		postbuildcommands { 'xcopy /Y /I /E "%{prj.location}/assets" "%{cfg.targetdir}/assets"' }
