@@ -164,6 +164,15 @@ namespace Hazel {
 
 	void EditorLayer::OnEvent(Hazel::Event& e)
 	{
+		if (e.GetEventType() == Hazel::EventType::WindowResize)
+		{
+			if (m_ViewportSize.x > 0.0f && m_ViewportSize.y > 0.0f)
+			{
+				m_CameraController.OnResize(m_ViewportSize.x, m_ViewportSize.y);
+			}
+			return;
+		}
+
 		m_CameraController.OnEvent(e);
 	}
 
