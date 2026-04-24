@@ -18,6 +18,7 @@ IncludeDir["Glad"] = "vendor/Glad/include"
 IncludeDir["ImGui"] = "vendor/imgui"
 IncludeDir["glm"] = "vendor/glm"
 IncludeDir["stb_image"] = "vendor/stb_image"
+IncludeDir["entt"] = "vendor/entt/include"
 
 include "vendor/GLFW"
 include "vendor/Glad"
@@ -55,6 +56,7 @@ project "Hazel"
 		"%{IncludeDir.ImGui}",
 		"%{IncludeDir.glm}",
 		"%{IncludeDir.stb_image}",
+		"%{IncludeDir.entt}"
 
 	}
 	links
@@ -108,8 +110,6 @@ project "Hazel"
 		runtime "Release"
 		optimize "Full"
 		buildoptions {"/utf-8"}
-
-
 
 
 project "Sandox"
@@ -201,7 +201,8 @@ project "Hazelinput"
 		"vendor/spdlog-1.2.1/include",
 		"src",
 		"%{IncludeDir.glm}",
-		"%{IncludeDir.ImGui}"
+		"%{IncludeDir.ImGui}",
+		"%{IncludeDir.entt}"
 	}
 
 	links
