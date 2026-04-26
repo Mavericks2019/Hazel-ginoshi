@@ -4,6 +4,12 @@
 
 namespace Hazel {
 
+	struct MeshComponent
+	{
+		bool Data;
+		MeshComponent() = default;
+	};
+
 	struct TransformComponent
 	{
 		glm::mat4 Transform{ 1.0f };

@@ -21,13 +21,15 @@ namespace Hazel {
 	Scene::Scene()
 	{
 #if ENTT_EXAMPLE_CODE
+
+
 		entt::entity entity = m_Registry.create();
 		m_Registry.emplace<TransformComponent>(entity, glm::mat4(1.0f));
 
 		m_Registry.on_construct<TransformComponent>().connect<&OnTransformConstruct>();
 
 
-		if (m_Registry.has<TransformComponent>(entity))
+		if (m_Registry.any_of<TransformComponent>(entity))
 			TransformComponent& transform = m_Registry.get<TransformComponent>(entity);
 
 

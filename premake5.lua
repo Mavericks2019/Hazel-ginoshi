@@ -133,7 +133,8 @@ project "Sandox"
 		"vendor/spdlog-1.2.1/include",
 		"src",
 		"%{IncludeDir.glm}",
-		"%{IncludeDir.ImGui}"
+		"%{IncludeDir.ImGui}",
+		"%{IncludeDir.entt}"
 	}
 
 	links
