@@ -63,7 +63,7 @@ namespace Hazel {
 	void Scene::OnUpdate(Timestep ts)
 	{
 		auto group = m_Registry.group<TransformComponent>(entt::get<SpriteRendererComponent>);
-		for (auto entity : group)
+		for (auto it = group.begin(), end = group.end(); !(it == end); ++it)
 		{
 			auto& [transform, sprite] = group.get<TransformComponent, SpriteRendererComponent>(entity);
 
