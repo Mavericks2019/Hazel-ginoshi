@@ -110,7 +110,6 @@ namespace Hazel {
 					{
 						HZ_PROFILE_SCOPE("LayerZStack Onupdate");
 						layer->OnUpdate(timestep);
-						auto [x, y] = Input::GetMousePosition();
 					}
 				}
 			}

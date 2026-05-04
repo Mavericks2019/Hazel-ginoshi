@@ -1,4 +1,5 @@
 #pragma once
+#include "Hazel/Core/PlatformDetection.h"
 #include <memory>
 #ifdef HZ_PLATFORM_WINDOWS
 #if HZ_DYNAMIC_LINK

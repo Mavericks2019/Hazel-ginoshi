@@ -1,5 +1,8 @@
 #pragma once
 
+#include <cstdint>
+#include <ostream>
+
 namespace Hazel
 {
 	typedef enum class MouseCode : uint16_t

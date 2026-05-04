@@ -1,4 +1,4 @@
-﻿#include "hzpch.h"
+#include "hzpch.h"
 #include "Hazel.h"
 #include "Sandbox2D.h"
 #include "GameLayer/GameLayer.h"
@@ -12,8 +12,8 @@ public:
     {
         //PushOverlay(new Hazel::ImGuiLayer());
         //PushLayer(new ExampleLayer());
-        //PushLayer(new Sandbox2D());
-        PushLayer(new GameLayer());
+        PushLayer(new Sandbox2D());
+        //PushLayer(new GameLayer());
     }
     ~Sandox() {}
 };
