@@ -8,6 +8,10 @@
 #include "Hazel/ImGui/ImGuiLayer.h"
 
 #include "Hazel/Core/Timestep.h"
+
+#ifdef HZ_PLATFORM_WINDOWS
+	#include <windows.h>
+#endif
 #include "glfw/glfw3.h"
 
 namespace Hazel {

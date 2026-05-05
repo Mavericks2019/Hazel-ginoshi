@@ -106,7 +106,7 @@ void Sandbox2D::OnUpdate(Hazel::Timestep ts)
 
     }
 
-    if (Hazel::Input::IsMouseButtonPressed(HZ_MOUSE_BUTTON_LEFT))
+    if (Hazel::Input::IsMouseButtonPressed(Hazel::Mouse::ButtonLeft))
     {
         auto mousePos = Hazel::Input::GetMousePosition();
         auto x = mousePos.x;
