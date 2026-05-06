@@ -29,6 +29,10 @@ namespace Hazel {
 		auto square = m_ActiveScene->CreateEntity("Green Square");
 		square.AddComponent<SpriteRendererComponent>(glm::vec4{ 0.0f, 1.0f, 0.0f, 1.0f });
 
+		auto redSquare = m_ActiveScene->CreateEntity("Red Square");
+		redSquare.AddComponent<SpriteRendererComponent>(glm::vec4{ 1.0f, 0.0f, 0.0f, 1.0f });
+
+
 		m_SquareEntity = square;
 
 		m_CameraEntity = m_ActiveScene->CreateEntity("Camera Entity");
@@ -41,16 +45,15 @@ namespace Hazel {
 		class CameraController : public ScriptableEntity
 		{
 		public:
-			void OnCreate()
-			{
-				std::cout << "111" << std::endl;
-			}
-
-			void OnDestroy()
+			virtual void OnCreate() override
 			{
 			}
 
-			void OnUpdate(Timestep ts)
+			virtual void OnDestroy() override
+			{
+			}
+
+			virtual void OnUpdate(Timestep ts) override
 			{
 				auto& transform = GetComponent<TransformComponent>().Transform;
 				float speed = 5.0f;
