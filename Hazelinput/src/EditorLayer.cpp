@@ -37,6 +37,7 @@ namespace Hazel {
 
 		m_CameraEntity = m_ActiveScene->CreateEntity("Camera Entity");
 		m_CameraEntity.AddComponent<CameraComponent>();
+		m_CameraEntity.GetComponent<TransformComponent>().Transform[3][2] = 10.0f;
 
 		m_SecondCamera = m_ActiveScene->CreateEntity("Clip-Space Entity");
 		auto& cc = m_SecondCamera.AddComponent<CameraComponent>();
