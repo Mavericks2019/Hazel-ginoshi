@@ -62,9 +62,8 @@ namespace Hazel {
 		stbi_set_flip_vertically_on_load(1);
 		stbi_uc* data = nullptr;
 		{
-			HZ_PROFILE_SCOPE("OpenGLTexture2D::OpenGLTexture2D(const std::string& path) stbi_load");
+			HZ_PROFILE_SCOPE("stbi_load - OpenGLTexture2D::OpenGLTexture2D(const std::string&)");
 			data = stbi_load(path.c_str(), &width, &height, &channels, 0);
-
 		}
 
 		if (data)
