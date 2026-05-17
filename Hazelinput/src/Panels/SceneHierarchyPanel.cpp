@@ -24,7 +24,7 @@ namespace Hazel {
 		ImGui::Begin("Scene Hierarchy");
 
 		for (auto entityID : m_Context->m_Registry.storage<entt::entity>())
-			{
+		{
 				Entity entity{ entityID , m_Context.get() };
 				DrawEntityNode(entity);
 		}
