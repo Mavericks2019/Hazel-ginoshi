@@ -19,10 +19,12 @@ IncludeDir["ImGui"] = "vendor/imgui"
 IncludeDir["glm"] = "vendor/glm"
 IncludeDir["stb_image"] = "vendor/stb_image"
 IncludeDir["entt"] = "vendor/entt/include"
+IncludeDir["yaml_cpp"] = "vendor/yaml-cpp/include"
 
 include "vendor/GLFW"
 include "vendor/Glad"
 include "vendor/imgui"
+include "vendor/yaml-cpp"
 
 project "Hazel"
 	kind "StaticLib"
@@ -53,7 +55,8 @@ project "Hazel"
 		"%{IncludeDir.ImGui}",
 		"%{IncludeDir.glm}",
 		"%{IncludeDir.stb_image}",
-		"%{IncludeDir.entt}"
+		"%{IncludeDir.entt}",
+		"%{IncludeDir.yaml_cpp}"
 	}
 
 	links
@@ -61,6 +64,7 @@ project "Hazel"
 		"GLFW",
 		"Glad",
 		"ImGui",
+		"yaml-cpp",
 		"opengl32.lib"
 	}
 
