@@ -76,6 +76,9 @@ namespace Hazel {
 		m_SecondCamera.AddComponent<NativeScriptComponent>().Bind<CameraController>();
 		m_SceneHierarchyPanel.SetContext(m_ActiveScene);
 
+		SceneSerializer serializer(m_ActiveScene);
+		serializer.Serialize("assets/scenes/Example.hazel");
+
 	}	
 
 	void EditorLayer::OnDetach()
