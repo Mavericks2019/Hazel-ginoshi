@@ -167,17 +167,14 @@ namespace Hazel {
 			if (ImGui::BeginMenu("File"))
 			{
 
-				if (ImGui::MenuItem("Serialize"))
-				{
-					SceneSerializer serializer(m_ActiveScene);
-					serializer.Serialize("assets/scenes/Example.hazel");
-				}
+				if (ImGui::MenuItem("New", "Ctrl+N"))
+					NewScene();
 
-				if (ImGui::MenuItem("Deserialize"))
-				{
-					SceneSerializer serializer(m_ActiveScene);
-					serializer.Deserialize("assets/scenes/Example.hazel");
-				}
+				if (ImGui::MenuItem("Open...", "Ctrl+O"))
+					OpenScene();
+
+				if (ImGui::MenuItem("Save As...", "Ctrl+Shift+S"))
+					SaveSceneAs();
 
 				if (ImGui::MenuItem("Exit")) Application::Get().Close();
 				ImGui::EndMenu();
@@ -216,7 +213,6 @@ namespace Hazel {
 
 		ImGui::End();
 	}
-
 	void EditorLayer::OnEvent(Event& e)
 	{
 		if (e.GetEventType() == EventType::WindowResize)
