@@ -1576,4 +1576,7 @@
     <ClCompile Include="src\Platform\Windows\WindowsPlatformUtils.cpp" />
     <ClCompile Include="src\Hazel\Math\Math.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Hazelinput\assets\scenes\3DExample.hazel" />
+  </ItemGroup>
 </Project>
