@@ -262,6 +262,7 @@ namespace Hazel {
 			break;
 		}
 		}
+		return false;
 	}
 
 	void EditorLayer::NewScene()

@@ -216,7 +216,8 @@ namespace Hazel {
 
 			char buffer[256];
 			memset(buffer, 0, sizeof(buffer));
-			std::strncpy(buffer, tag.c_str(), sizeof(buffer));
+			size_t len = std::min(tag.size(), sizeof(buffer) - 1);
+			memcpy(buffer, tag.c_str(), len);
 			if (ImGui::InputText("##Tag", buffer, sizeof(buffer)))
 			{
 				tag = std::string(buffer);
