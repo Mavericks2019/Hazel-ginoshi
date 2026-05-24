@@ -20,7 +20,8 @@ project "Hazelinput"
 		"%{wks.location}/%{IncludeDir.GLFW}",
 		"%{wks.location}/%{IncludeDir.glm}",
 		"%{wks.location}/%{IncludeDir.ImGui}",
-		"%{wks.location}/%{IncludeDir.entt}"
+		"%{wks.location}/%{IncludeDir.entt}",
+		"%{wks.location}/%{IncludeDir.ImGuizmo}"
 	}
 
 	links
