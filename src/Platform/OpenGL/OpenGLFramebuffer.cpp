@@ -215,7 +215,7 @@ namespace Hazel {
 
 	void OpenGLFramebuffer::ClearAttachment(uint32_t attachmentIndex, int value)
 	{
-		HZ_CORE_ASSERT(attachmentIndex < m_ColorAttachments.size());
+		HZ_CORE_ASSERT(attachmentIndex < m_ColorAttachmentSpecifications.size());
 
 		auto& spec = m_ColorAttachmentSpecifications[attachmentIndex];
 		glClearTexImage(m_ColorAttachments[attachmentIndex], 0,

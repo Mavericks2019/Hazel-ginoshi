@@ -1,5 +1,5 @@
 [submodule "vendor/spdlog"]
-	path = Hazel/vendor/spdlog
+	path = vendor/spdlog
 	url = ../../gabime/spdlog.git
 [submodule "vendor/GLFW"]
 	path = vendor/GLFW
@@ -12,7 +12,7 @@
 	url = ../../g-truc/glm.git
 [submodule "vendor/yaml-cpp"]
 	path = vendor/yaml-cpp
-	url = https://github.com/TheCherno/yaml-cpp.git
+	url = git@github.com:TheCherno/yaml-cpp.git
 [submodule "vendor/ImGuizmo"]
 	path = vendor/ImGuizmo
-	url = https://github.com/TheCherno/ImGuizmo
+	url = git@github.com:TheCherno/ImGuizmo.git
