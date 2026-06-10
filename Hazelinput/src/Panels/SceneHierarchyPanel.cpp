@@ -28,6 +28,7 @@ namespace Hazel {
 	{
 		m_Context = context;
 		m_SelectionContext = {};
+		m_EntityToDelete = {};
 	}
 
 	void SceneHierarchyPanel::OnImGuiRender()
@@ -38,6 +39,15 @@ namespace Hazel {
 		{
 				Entity entity{ entityID , m_Context.get() };
 				DrawEntityNode(entity);
+		}
+
+		// Defer deletion until after iteration to avoid invalidating EnTT iterators
+		if (m_EntityToDelete)
+		{
+			m_Context->DestroyEntity(m_EntityToDelete);
+			if (m_SelectionContext == m_EntityToDelete)
+				m_SelectionContext = {};
+			m_EntityToDelete = {};
 		}
 
 		if (ImGui::IsMouseDown(0) && ImGui::IsWindowHovered())
@@ -65,6 +75,9 @@ namespace Hazel {
 
 	void SceneHierarchyPanel::DrawEntityNode(Entity entity)
 	{
+		if (!entity || !entity.HasComponent<TagComponent>())
+			return;
+
 		auto& tag = entity.GetComponent<TagComponent>().Tag;
 
 		ImGuiTreeNodeFlags flags = ((m_SelectionContext == entity) ? ImGuiTreeNodeFlags_Selected : 0) | ImGuiTreeNodeFlags_OpenOnArrow;
@@ -95,9 +108,7 @@ namespace Hazel {
 
 		if (entityDeleted)
 		{
-			m_Context->DestroyEntity(entity);
-			if (m_SelectionContext == entity)
-				m_SelectionContext = {};
+			m_EntityToDelete = entity;
 		}
 	}
 

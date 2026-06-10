@@ -2,7 +2,7 @@
 
 #include "entt.hpp"
 
-
+#include "Hazel/Renderer/EditorCamera.h"
 #include "Hazel/Core/Timestep.h"
 #include "Hazel/Renderer/EditorCamera.h"
 

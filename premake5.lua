@@ -90,7 +90,7 @@ project "Hazel"
 		}
 
 	filter "configurations:Debug"
-		defines "HZ_DEBUG"
+		defines { "HZ_DEBUG", "HZ_ENABLE_ASSERTS" }
 		symbols "on"
 		buildoptions { "/utf-8" }
 

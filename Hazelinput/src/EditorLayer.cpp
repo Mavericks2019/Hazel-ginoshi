@@ -33,6 +33,7 @@ namespace Hazel {
 		m_ActiveScene = CreateRef<Scene>();
 
 		m_EditorCamera = EditorCamera(30.0f, 1.778f, 0.1f, 1000.0f);
+#if 0
 		// Entity
 		auto square = m_ActiveScene->CreateEntity("Green Square");
 		square.AddComponent<SpriteRendererComponent>(glm::vec4{ 0.0f, 1.0f, 0.0f, 1.0f });
@@ -81,6 +82,7 @@ namespace Hazel {
 		};
 		m_CameraEntity.AddComponent<NativeScriptComponent>().Bind<CameraController>();
 		m_SecondCamera.AddComponent<NativeScriptComponent>().Bind<CameraController>();
+#endif
 		m_SceneHierarchyPanel.SetContext(m_ActiveScene);
 
 		SceneSerializer serializer(m_ActiveScene);
@@ -110,8 +112,10 @@ namespace Hazel {
 
 		// Update
 		if (m_ViewportFocused)
+		{
 			m_CameraController.OnUpdate(ts);
-		m_EditorCamera.OnUpdate(ts);
+			m_EditorCamera.OnUpdate(ts);
+		}
 
 		// Render
 		Renderer2D::ResetStats();
@@ -285,6 +289,8 @@ namespace Hazel {
 		}
 
 		m_CameraController.OnEvent(e);
+		m_EditorCamera.OnEvent(e);
+
 		EventDispatcher dispatcher(e);
 		dispatcher.Dispatch<KeyPressedEvent>(HZ_BIND_EVENT_FN(EditorLayer::OnKeyPressed));
 	}
@@ -319,6 +325,26 @@ namespace Hazel {
 			if (control && shift)
 				SaveSceneAs();
 
+			break;
+		}
+		case Key::Q:
+		{
+			m_GizmoType = -1;
+			break;
+		}
+		case Key::W:
+		{
+			m_GizmoType = ImGuizmo::OPERATION::TRANSLATE;
+			break;
+		}
+		case Key::E:
+		{
+			m_GizmoType = ImGuizmo::OPERATION::ROTATE;
+			break;
+		}
+		case Key::R:
+		{
+			m_GizmoType = ImGuizmo::OPERATION::SCALE;
 			break;
 		}
 		}

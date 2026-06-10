@@ -24,6 +24,7 @@ namespace Hazel {
 	private:
 		Ref<Scene> m_Context;
 		Entity m_SelectionContext;
+		Entity m_EntityToDelete;
 	};
 
 }
