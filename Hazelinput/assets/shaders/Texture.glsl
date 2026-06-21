@@ -30,6 +30,7 @@ void main()
 
 layout(location = 0) out vec4 color;
 layout(location = 1) out int color2;
+layout(location = 2) out vec4 color3;
 
 in vec4 v_Color;
 in vec2 v_TexCoord;
@@ -79,5 +80,6 @@ void main()
 	}
 	color = texColor;
 
-	color2 = 50; // placeholder for our entity ID
+	color2 = 50 ; // placeholder for our entity ID
+	color3 = vec4(0.2, 0.9, 0.3, 1.0); // green - third attachment
 }

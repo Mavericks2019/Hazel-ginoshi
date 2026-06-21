@@ -40,7 +40,7 @@ namespace Hazel {
 		std::vector<FramebufferTextureSpecification> Attachments;
 	};
 
-	struct FramebufferSpecification
+	struct FramebufferSpecification 
 	{
 		uint32_t Width = 0, Height = 0;
 		FramebufferAttachmentSpecification Attachments;
