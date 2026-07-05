@@ -28,7 +28,7 @@ namespace Hazel {
 	{
 		m_Context = context;
 		m_SelectionContext = {};
-		m_EntityToDelete = {};
+		//m_EntityToDelete = {};
 	}
 
 	void SceneHierarchyPanel::OnImGuiRender()
@@ -71,6 +71,11 @@ namespace Hazel {
 		}
 
 		ImGui::End();
+	}
+
+	void SceneHierarchyPanel::SetSelectedEntity(Entity entity)
+	{
+		m_SelectionContext = entity;
 	}
 
 	void SceneHierarchyPanel::DrawEntityNode(Entity entity)

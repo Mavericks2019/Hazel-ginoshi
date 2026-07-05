@@ -24,7 +24,7 @@ namespace Hazel {
 		void OnViewportResize(uint32_t width, uint32_t height);
 		Entity GetPrimaryCameraEntity();
 
-		bool IsEntityValid(entt::entity entity) const { return m_Registry.valid(entity); }
+		// bool IsEntityValid(entt::entity entity) const { return m_Registry.valid(entity); }
 	private:
 		template<typename T>
 		void OnComponentAdded(Entity entity, T& component);
