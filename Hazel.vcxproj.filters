@@ -1486,6 +1486,11 @@
       <Filter>vendor\stb_image</Filter>
     </ClInclude>
     <ClInclude Include="src\Hazel\Renderer\EditorCamera.h" />
+    <ClInclude Include="Time.h">
+      <Filter>src\Hazel\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platform\OpenGL\OpenGLUniformBuffer.h" />
+    <ClInclude Include="src\Hazel\Renderer\UniformBuffer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Hazel\Core\Application.cpp">
@@ -1600,5 +1605,7 @@
       <Filter>vendor\stb_image</Filter>
     </ClCompile>
     <ClCompile Include="src\Hazel\Renderer\EditorCamera.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\OpenGLUniformBuffer.cpp" />
+    <ClCompile Include="src\Hazel\Renderer\UniformBuffer.cpp" />
   </ItemGroup>
 </Project>
