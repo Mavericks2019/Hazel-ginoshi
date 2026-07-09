@@ -1,4 +1,4 @@
-﻿#include "hzpch.h"
+#include "hzpch.h"
 #include "Application.h"
 #include "Hazel/Core/Log.h"
 #include "Hazel/Core/Input.h"
@@ -11,7 +11,8 @@ namespace Hazel {
 #define BIND_EVENT_FN(x) std::bind(&Application::x, this, std::placeholders::_1)
 
 	Application* Application::s_Instance = nullptr;
-	Application::Application(const std::string& name)
+	Application::Application(const std::string& name, ApplicationCommandLineArgs args)
+		: m_CommandLineArgs(args)
 	{
 		HZ_PROFILE_FUNCTION();
 		HZ_CORE_ASSERT(!Is_Instance, "Application already exists!");

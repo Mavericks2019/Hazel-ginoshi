@@ -8,7 +8,8 @@
 class Sandox : public Hazel::Application
 {
 public:
-    Sandox()
+    Sandox(Hazel::ApplicationCommandLineArgs args)
+        : Application("Sandbox", args)
     {
         //PushOverlay(new Hazel::ImGuiLayer());
         //PushLayer(new ExampleLayer());
@@ -18,7 +19,7 @@ public:
     ~Sandox() {}
 };
 
-Hazel::Application* Hazel::CreateApplication()
+Hazel::Application* Hazel::CreateApplication(Hazel::ApplicationCommandLineArgs args)
 {
-    return new Sandox();
+    return new Sandox(args);
 }

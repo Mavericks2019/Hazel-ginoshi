@@ -1486,7 +1486,7 @@
       <Filter>vendor\stb_image</Filter>
     </ClInclude>
     <ClInclude Include="src\Hazel\Renderer\EditorCamera.h" />
-    <ClInclude Include="Time.h">
+    <ClInclude Include="src\Hazel\Core\Time.h">
       <Filter>src\Hazel\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\Platform\OpenGL\OpenGLUniformBuffer.h" />

@@ -8,8 +8,8 @@ namespace Hazel {
 	class Hazelnut : public Application
 	{
 	public:
-		Hazelnut()
-			: Application("Hazel Input")
+		Hazelnut(ApplicationCommandLineArgs args)
+			: Application("Hazelnut", args)
 		{
 			PushLayer(new EditorLayer());
 		}
@@ -19,9 +19,8 @@ namespace Hazel {
 		}
 	};
 
-	Application* CreateApplication()
-	{
-		return new Hazelnut();
+	Application* CreateApplication(ApplicationCommandLineArgs args) {
+		return new Hazelnut(args);
 	}
 
 }
