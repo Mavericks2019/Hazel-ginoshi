@@ -2,13 +2,8 @@
 
 #include "Random.h"
 
-#include <cmath>
-
 #define GLM_ENABLE_EXPERIMENTAL
-#include <glm/glm.hpp>
 #include <glm/gtx/compatibility.hpp>
-#include <glm/gtc/constants.hpp>
-#include <glm/gtc/type_ptr.hpp>
 
 ParticleSystem::ParticleSystem(uint32_t maxParticles)
 	:m_PoolIndex(maxParticles - 1)
@@ -23,14 +18,10 @@ void ParticleSystem::Emit(const ParticleProps& particleProps)
 	particle.Position = particleProps.Position;
 	particle.Rotation = Random::Float() * 2.0f * glm::pi<float>();
 
-	// Velocity - circular spread
-	float maxSpeed = glm::length(particleProps.VelocityVariation);
-	float speed = Random::Float() * maxSpeed;
-	float angle = Random::Float() * 2.0f * glm::pi<float>();
-	particle.Velocity.x = speed * std::cos(angle);
-	particle.Velocity.y = speed * std::sin(angle);
-	// Add base velocity
-	particle.Velocity += particleProps.Velocity;
+	// Velocity
+	particle.Velocity = particleProps.Velocity;
+	particle.Velocity.x += particleProps.VelocityVariation.x * (Random::Float() - 0.5f);
+	particle.Velocity.y += particleProps.VelocityVariation.y * (Random::Float() - 0.5f);
 
 	// Color
 	particle.ColorBegin = particleProps.ColorBegin;
