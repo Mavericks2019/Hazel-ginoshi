@@ -7,3 +7,19 @@ bin-int/
 .idea/
 *.json
 *.backup
+
+# Python
+__pycache__/
+
+# Python packages installed to vendor (re-install via pip)
+vendor/certifi*/
+vendor/charset_normalizer*/
+vendor/fake_useragent*/
+vendor/idna*/
+vendor/requests*/
+vendor/urllib3*/
+vendor/*.pyd
+vendor/bin/
+
+# Vulkan SDK installer (too large, downloaded on demand)
+vendor/VulkanSDK/
