@@ -22,6 +22,7 @@
 #include <vector>
 #include <unordered_map>
 #include <unordered_set>
+#include <filesystem>
 
 #include "Hazel/Core/Log.h"
 #include "Hazel/Debug/Instrumentor.h"
