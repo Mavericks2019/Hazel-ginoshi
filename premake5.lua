@@ -97,7 +97,7 @@ project "Hazel"
 
 	filter "system:windows"
 		cppdialect "C++17"
-		staticruntime "on"
+		staticruntime "off"
 		systemversion "latest"
 
 		defines
