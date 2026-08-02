@@ -61,7 +61,8 @@ void main()
 {
 	vec4 texColor = Input.Color;
 
-	switch(int(Input.TexIndex))
+	int TexIndex = int(Input.TexIndex);
+	switch(TexIndex)
 	{
 	case  0: texColor *= texture(u_Textures[0], Input.TexCoord * Input.TilingFactor); break;
 	case  1: texColor *= texture(u_Textures[1], Input.TexCoord * Input.TilingFactor); break;

@@ -97,8 +97,9 @@ namespace Hazel {
 		sources[GL_VERTEX_SHADER] = vertexSrc;
 		sources[GL_FRAGMENT_SHADER] = fragmentSrc;
 
-		Compile(sources);
-
+		CompileOrGetVulkanBinaries(sources);
+		CompileOrGetOpenGLBinaries();
+		CreateProgram();
 	}
 
 	OpenGLShader::OpenGLShader(const std::string& filepath)
@@ -106,9 +107,20 @@ namespace Hazel {
 	{
 		HZ_PROFILE_FUNCTION();
 
+		Utils::CreateCacheDirectoryIfNeeded();
+
 		std::string source = ReadFile(filepath);
 		auto shaderSources = PreProcess(source);
-		Compile(shaderSources);
+
+		{
+			Timer timer;
+			CompileOrGetVulkanBinaries(shaderSources);
+			CompileOrGetOpenGLBinaries();
+			CreateProgram();
+			HZ_CORE_WARN("Shader creation took {0} ms", timer.ElapsedMillis());
+		}
+
+		// Extract name from filepath
 		auto lastSlash = filepath.find_last_of("/\\");
 		lastSlash = lastSlash == std::string::npos ? 0 : lastSlash + 1;
 		auto lastDot = filepath.rfind('.');
@@ -134,9 +146,9 @@ namespace Hazel {
 		size_t pos = source.find(typeToken, 0);
 		while (pos != std::string::npos)
 		{
-			size_t eol = source.find_first_of("\r\n", pos); 
+			size_t eol = source.find_first_of("\r\n", pos);
 			HZ_CORE_ASSERT(eol != std::string::npos, "Syntax error");
-			size_t begin = pos + typeTokenLength + 1; 
+			size_t begin = pos + typeTokenLength + 1;
 			std::string type = source.substr(begin, eol - begin);
 			HZ_CORE_ASSERT(Utils::ShaderTypeFromString(type), "Invalid shader type specified");
 
@@ -154,16 +166,18 @@ namespace Hazel {
 	{
 
 		std::string result;
-		std::ifstream in(filepath, std::ios::in, std::ios::binary); // ifstream closes itself due to RAII
+		std::ifstream in(filepath, std::ios::in | std::ios::binary); // ifstream closes itself due to RAII
 		if (in)
 		{
 			in.seekg(0, std::ios::end);
-			size_t size = in.tellg();
-			if (size != -1)
+			std::streamsize size = in.tellg();
+			in.seekg(0, std::ios::beg);
+			if (size > 0)
 			{
-				result.resize(size);
-				in.seekg(0, std::ios::beg);
+				result.resize((size_t)size);
 				in.read(&result[0], size);
+				// Trim to actual bytes read (prevents trailing nulls if read was short)
+				result.resize((size_t)in.gcount());
 			}
 			else
 			{
@@ -248,8 +262,6 @@ namespace Hazel {
 
 	void OpenGLShader::CompileOrGetVulkanBinaries(const std::unordered_map<GLenum, std::string>& shaderSources)
 	{
-		GLuint program = glCreateProgram();
-
 		shaderc::Compiler compiler;
 		shaderc::CompileOptions options;
 		options.SetTargetEnvironment(shaderc_target_env_vulkan, shaderc_env_version_vulkan_1_2);
@@ -340,7 +352,9 @@ namespace Hazel {
 				m_OpenGLSourceCode[stage] = glslCompiler.compile();
 				auto& source = m_OpenGLSourceCode[stage];
 
-				shaderc::SpvCompilationResult module = compiler.CompileGlslToSpv(source, Utils::GLShaderStageToShaderC(stage), m_FilePath.c_str());
+
+
+				shaderc::SpvCompilationResult module = compiler.CompileGlslToSpv(source, Utils::GLShaderStageToShaderC(stage), m_FilePath.c_str(), options);
 				if (module.GetCompilationStatus() != shaderc_compilation_status_success)
 				{
 					HZ_CORE_ERROR(module.GetErrorMessage());

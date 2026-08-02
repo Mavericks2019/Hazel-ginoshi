@@ -23,3 +23,8 @@ vendor/bin/
 
 # Vulkan SDK installer (too large, downloaded on demand)
 vendor/VulkanSDK/
+
+# Shader cache and generated files
+**/assets/cache/
+shaderc_vulkan_error.txt
+spirv_cross_output_*.glsl
