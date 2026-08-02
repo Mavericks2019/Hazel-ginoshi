@@ -1,5 +1,6 @@
 #include <Hazel.h>
 #include <Hazel/Core/EntryPoint.h>
+#include <Hazel/Renderer/Shader.h>
 
 #include "EditorLayer.h"
 
@@ -11,6 +12,9 @@ namespace Hazel {
 		Hazelnut(ApplicationCommandLineArgs args)
 			: Application("Hazelnut", args)
 		{
+			// Use SPIR-V shader compilation for UBO-based shaders (Hazelinput's Texture.glsl)
+			Shader::SetDefaultCompileMode(ShaderCompileMode::SPIRV);
+
 			PushLayer(new EditorLayer());
 		}
 

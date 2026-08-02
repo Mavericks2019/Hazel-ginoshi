@@ -6,6 +6,12 @@
 
 namespace Hazel {
 
+	enum class ShaderCompileMode
+	{
+		Standard,  // Old-style: glShaderSource / glCompileShader (works for Sandbox inline shaders)
+		SPIRV      // SPIR-V cross-compilation pipeline (works for Hazelinput UBO shaders)
+	};
+
 	class Shader
 	{
 	public:
@@ -26,9 +32,15 @@ namespace Hazel {
 		virtual const std::string& GetName() const = 0;
 		static Ref<Shader> Create(const std::string& filepath);
 		static Ref<Shader> Create(const std::string& name, const std::string& vertexSrc, const std::string& fragmentSrc);
+		static Ref<Shader> Create(const std::string& filepath, ShaderCompileMode mode);
+		static Ref<Shader> Create(const std::string& name, const std::string& vertexSrc, const std::string& fragmentSrc, ShaderCompileMode mode);
+
+		static void SetDefaultCompileMode(ShaderCompileMode mode) { s_DefaultCompileMode = mode; }
+		static ShaderCompileMode GetDefaultCompileMode() { return s_DefaultCompileMode; }
 		//virtual const std::string& GetName() const = 0;
 	private:
 		uint32_t m_RenderID;
+		static ShaderCompileMode s_DefaultCompileMode;
 
 	};
 

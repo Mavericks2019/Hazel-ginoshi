@@ -88,7 +88,21 @@ namespace Hazel {
 
 	}
 
+	// ── Old-style constructors (default: ShaderCompileMode::Standard) ─────────
+
 	OpenGLShader::OpenGLShader(const std::string& name, const std::string& vertexSrc, const std::string& fragmentSrc)
+		: OpenGLShader(name, vertexSrc, fragmentSrc, ShaderCompileMode::Standard)
+	{
+	}
+
+	OpenGLShader::OpenGLShader(const std::string& filepath)
+		: OpenGLShader(filepath, ShaderCompileMode::Standard)
+	{
+	}
+
+	// ── New constructors with explicit compile mode ────────────────────────────
+
+	OpenGLShader::OpenGLShader(const std::string& name, const std::string& vertexSrc, const std::string& fragmentSrc, ShaderCompileMode mode)
 		: m_Name(name)
 	{
 		HZ_PROFILE_FUNCTION();
@@ -97,12 +111,20 @@ namespace Hazel {
 		sources[GL_VERTEX_SHADER] = vertexSrc;
 		sources[GL_FRAGMENT_SHADER] = fragmentSrc;
 
-		CompileOrGetVulkanBinaries(sources);
-		CompileOrGetOpenGLBinaries();
-		CreateProgram();
+		switch (mode)
+		{
+		case ShaderCompileMode::Standard:
+			Compile(sources);
+			break;
+		case ShaderCompileMode::SPIRV:
+			CompileOrGetVulkanBinaries(sources);
+			CompileOrGetOpenGLBinaries();
+			CreateProgram();
+			break;
+		}
 	}
 
-	OpenGLShader::OpenGLShader(const std::string& filepath)
+	OpenGLShader::OpenGLShader(const std::string& filepath, ShaderCompileMode mode)
 		: m_FilePath(filepath)
 	{
 		HZ_PROFILE_FUNCTION();
@@ -112,12 +134,20 @@ namespace Hazel {
 		std::string source = ReadFile(filepath);
 		auto shaderSources = PreProcess(source);
 
+		switch (mode)
+		{
+		case ShaderCompileMode::Standard:
+			Compile(shaderSources);
+			break;
+		case ShaderCompileMode::SPIRV:
 		{
 			Timer timer;
 			CompileOrGetVulkanBinaries(shaderSources);
 			CompileOrGetOpenGLBinaries();
 			CreateProgram();
 			HZ_CORE_WARN("Shader creation took {0} ms", timer.ElapsedMillis());
+			break;
+		}
 		}
 
 		// Extract name from filepath
@@ -170,14 +200,12 @@ namespace Hazel {
 		if (in)
 		{
 			in.seekg(0, std::ios::end);
-			std::streamsize size = in.tellg();
-			in.seekg(0, std::ios::beg);
-			if (size > 0)
+			size_t size = in.tellg();
+			if (size != -1)
 			{
-				result.resize((size_t)size);
+				result.resize(size);
+				in.seekg(0, std::ios::beg);
 				in.read(&result[0], size);
-				// Trim to actual bytes read (prevents trailing nulls if read was short)
-				result.resize((size_t)in.gcount());
 			}
 			else
 			{
@@ -197,7 +225,7 @@ namespace Hazel {
 		HZ_PROFILE_FUNCTION();
 
 		GLuint program = glCreateProgram();
-		HZ_CORE_ASSERT(shaderSources.size() <= 2 "we only support 2 shaders");
+		HZ_CORE_ASSERT(shaderSources.size() <= 2, "we only support 2 shaders");
 		std::array<GLenum, 2> glShaderIDs;
 		int glShaderIDindex = 0;
 		for (auto kv : shaderSources)
@@ -311,7 +339,7 @@ namespace Hazel {
 			}
 		}
 
-		for (auto&& [stage, data]: shaderData)
+		for (auto&& [stage, data] : shaderData)
 			Reflect(stage, data);
 	}
 
@@ -352,9 +380,7 @@ namespace Hazel {
 				m_OpenGLSourceCode[stage] = glslCompiler.compile();
 				auto& source = m_OpenGLSourceCode[stage];
 
-
-
-				shaderc::SpvCompilationResult module = compiler.CompileGlslToSpv(source, Utils::GLShaderStageToShaderC(stage), m_FilePath.c_str(), options);
+				shaderc::SpvCompilationResult module = compiler.CompileGlslToSpv(source, Utils::GLShaderStageToShaderC(stage), m_FilePath.c_str());
 				if (module.GetCompilationStatus() != shaderc_compilation_status_success)
 				{
 					HZ_CORE_ERROR(module.GetErrorMessage());

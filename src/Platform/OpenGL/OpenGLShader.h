@@ -11,9 +11,13 @@ namespace Hazel {
 	class OpenGLShader : public Shader
 	{
 	public:
+		// Old-style constructors (default to ShaderCompileMode::Standard)
 		OpenGLShader(const std::string& filepath);
 		OpenGLShader(const std::string& name, const std::string& vertexSrc, const std::string& fragmentSrc);
-		OpenGLShader(const std::string& vertexSrc, const std::string& fragmentSrc);
+
+		// New constructors with explicit compile mode selection
+		OpenGLShader(const std::string& filepath, ShaderCompileMode mode);
+		OpenGLShader(const std::string& name, const std::string& vertexSrc, const std::string& fragmentSrc, ShaderCompileMode mode);
 
 		virtual ~OpenGLShader();
 

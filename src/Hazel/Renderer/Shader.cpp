@@ -9,25 +9,37 @@
 
 namespace Hazel {
 
+	ShaderCompileMode Shader::s_DefaultCompileMode = ShaderCompileMode::Standard;
+
 
 	Ref<Shader> Shader::Create(const std::string& filepath)
+	{
+		return Create(filepath, s_DefaultCompileMode);
+	}
+
+	Ref<Shader> Shader::Create(const std::string& name, const std::string& vertexSrc, const std::string& fragmentSrc)
+	{
+		return Create(name, vertexSrc, fragmentSrc, s_DefaultCompileMode);
+	}
+
+	Ref<Shader> Shader::Create(const std::string& filepath, ShaderCompileMode mode)
 	{
 		switch (Renderer::GetAPI())
 		{
 			case RendererAPI::API::None:    HZ_CORE_ASSERT(false, "RendererAPI::None is currently not supported!"); return nullptr;
-			case RendererAPI::API::OpenGL:  return std::make_shared<OpenGLShader>(filepath);
+			case RendererAPI::API::OpenGL:  return std::make_shared<OpenGLShader>(filepath, mode);
 		}
 
 		HZ_CORE_ASSERT(false, "Unknown RendererAPI!");
 		return nullptr;
 	}
 
-	Ref<Shader> Shader::Create(const std::string& name, const std::string& vertexSrc, const std::string& fragmentSrc)
+	Ref<Shader> Shader::Create(const std::string& name, const std::string& vertexSrc, const std::string& fragmentSrc, ShaderCompileMode mode)
 	{
 		switch (Renderer::GetAPI())
 		{
 			case RendererAPI::API::None:    HZ_CORE_ASSERT(false, "RendererAPI::None is currently not supported!"); return nullptr;
-			case RendererAPI::API::OpenGL:  return std::make_shared<OpenGLShader>(name, vertexSrc, fragmentSrc);
+			case RendererAPI::API::OpenGL:  return std::make_shared<OpenGLShader>(name, vertexSrc, fragmentSrc, mode);
 		}
 
 		HZ_CORE_ASSERT(false, "Unknown RendererAPI!");
