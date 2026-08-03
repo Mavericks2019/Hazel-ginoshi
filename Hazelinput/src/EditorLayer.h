@@ -2,6 +2,8 @@
 
 #include "Hazel.h"
 #include "Panels/SceneHierarchyPanel.h"
+#include "Panels/ContentBrowserPanel.h"
+
 #include "Hazel/Renderer/EditorCamera.h"
 
 namespace Hazel {
@@ -49,6 +51,7 @@ namespace Hazel {
 		glm::vec4 m_SquareColor = { 0.2f, 0.3f, 0.8f, 1.0f };
 		int m_GizmoType = 0;
 		SceneHierarchyPanel m_SceneHierarchyPanel;
+		ContentBrowserPanel m_ContentBrowserPanel;
 	};
 
 }
