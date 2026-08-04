@@ -12,8 +12,8 @@ public:
         : Application("Sandbox", args)
     {
         //PushOverlay(new Hazel::ImGuiLayer());
-        //PushLayer(new ExampleLayer());
-        PushLayer(new Sandbox2D());
+        PushLayer(new ExampleLayer());
+        //PushLayer(new Sandbox2D());
         //PushLayer(new GameLayer());
     }
     ~Sandox() {}

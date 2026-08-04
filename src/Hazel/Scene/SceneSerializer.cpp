@@ -176,7 +176,7 @@ namespace Hazel {
 	void SceneSerializer::SerializeRuntime(const std::string& filepath)
 	{
 		// Not implemented
-		HZ_CORE_ASSERT(false);
+		HZ_CORE_ASSERT(false, "");
 	}
 
 	bool SceneSerializer::Deserialize(const std::string& filepath)
@@ -249,7 +249,7 @@ namespace Hazel {
 	bool SceneSerializer::DeserializeRuntime(const std::string& filepath)
 	{
 		// Not implemented
-		HZ_CORE_ASSERT(false);
+		HZ_CORE_ASSERT(false, "");
 		return false;
 	}
 

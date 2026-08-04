@@ -49,7 +49,7 @@ namespace Hazel {
 
 	void ShaderLibrary::Add(const std::string& name, const Ref<Shader>& shader)
 	{
-		HZ_CORE_ASSERT(m_shaders.find(name) == m_shaders.end(), "Shader already exists!");
+		HZ_CORE_ASSERT(m_Shaders.find(name) == m_Shaders.end(), "Shader already exists!");
 		m_Shaders[name] = shader;
 	}
 
